@@ -20,7 +20,7 @@ export default function useInfiniteScroll<T>({
   const queryResult = useInfiniteQuery({
     queryKey,
     queryFn,
-    getNextPageParam: (lastPage) => {
+    getNextPageParam: (lastPage: any) => {
       const { last, pageable } = lastPage;
 
       return last ? false : pageable.pageNumber + 1;

@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/nextjs';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 
 export default function withGetServerSideProps(
@@ -12,9 +11,6 @@ export default function withGetServerSideProps(
 
       return await getServerSideProps(context);
     } catch (e) {
-      Sentry.captureException(e);
-      console.log(e);
-
       return {
         notFound: true,
       };
