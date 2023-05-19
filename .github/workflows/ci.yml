@@ -2,15 +2,28 @@ name: fe-pg CI
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
 on:
-  push:
+  pull_request:
     branches:
       - main
+      - develop
+
 jobs:
-  vercel-preview-deploy:
+  unit-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - name: Install and Test
+        run: |
+          yarn
+          yarn test:coverage
+
+  vercel-preview-deploy:
+    if: github.ref_name == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
       - name: Pull Vercel Environment Information
