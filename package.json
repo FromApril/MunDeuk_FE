@@ -9,6 +9,7 @@
     "lint": "next lint",
     "test": "jest --watch",
     "test:coverage": "jest --coverage",
+    "test:all": "yarn test:coverage && yarn e2e", 
     "e2e": "cypress open"
   },
   "dependencies": {
