@@ -26,6 +26,7 @@ jobs:
       - uses: ArtiomTr/jest-coverage-report-action@v2
 
   vercel-preview-deploy:
+    if: github.ref_name == 'main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
