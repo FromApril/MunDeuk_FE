@@ -10,7 +10,7 @@ on:
       - develop
 
 jobs:
-  test:
+  unit-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,12 +18,6 @@ jobs:
         run: |
           yarn
           yarn test:coverage
-  
-  coverage:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ArtiomTr/jest-coverage-report-action@v2
 
   vercel-preview-deploy:
     if: github.ref_name == 'main'
