@@ -15,7 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Next build
-        run: yarn build
+        run: |
+          yarn
+          yarn build
       - uses: actions/upload-artifact@master
         with:
           name: Next.js artifacts
@@ -26,7 +28,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Unit test (Jest)
-        run: yarn test:coverage
+        run: |
+          yarn
+          yarn test:coverage
 
   e2e-test:
     needs: build
