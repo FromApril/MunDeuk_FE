@@ -1,9 +1,7 @@
 name: Deploy
 
 on:
-  pull_request:
-    types:
-      - merged
+  push:
     branches:
       - main
 
