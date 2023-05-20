@@ -10,23 +10,37 @@ on:
       - develop
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@master
+        with:
+          name: Next.js artifacts
+          path: .next
+      - name: Next build
+        run: yarn build
+
   unit-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install and Test
-        run: |
-          yarn
-          yarn test:coverage
+      - name: Unit test (Jest)
+        run: yarn test:coverage
 
   e2e-test:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/download-artifact@master
+        with:
+        name: Next.js artifacts
+        path: .next
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with: 
-          install-command: yarn install
+          start: yarn start
           command: yarn dlx cypress run
           record: false
 
