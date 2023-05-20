@@ -1,4 +1,4 @@
-name: fe-pg CI
+name: CI
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -10,25 +10,42 @@ on:
       - develop
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Next build
+        run: |
+          yarn
+          yarn build
+      - uses: actions/upload-artifact@master
+        with:
+          name: Next.js artifacts
+          path: .next
+
   unit-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install and Test
+      - name: Unit test (Jest)
         run: |
           yarn
           yarn test:coverage
 
-  vercel-preview-deploy:
-    if: github.ref_name == 'main'
+  e2e-test:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Build Project Artifacts
-        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+      - uses: actions/download-artifact@master
+        with:
+          name: Next.js artifacts
+          path: .next
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with: 
+          start: yarn start
+          command: yarn dlx cypress run
+          record: false
+
+  
