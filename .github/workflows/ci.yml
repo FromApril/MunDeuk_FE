@@ -26,9 +26,9 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with: 
-          working-directory: examples/yarn-morern-pnp
           install-command: yarn install
           command: yarn dlx cypress run
+          record: false
 
   vercel-preview-deploy:
     if: github.ref_name == 'main'
