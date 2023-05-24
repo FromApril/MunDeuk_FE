@@ -10,7 +10,10 @@
     "test": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:e2e": "cypress run",
-    "e2e": "cypress open"
+    "e2e": "cypress open",
+    "version-major": "npm version major -m 'v%s' && git push --tags",
+    "version-minor": "npm version minor -m 'v%s' && git push --tags",
+    "version-patch": "npm version patch -m 'v%s' && git push --tags"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.29.5",
