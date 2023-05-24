@@ -1,10 +1,9 @@
 name: Coverage
 
 on:
-  pull_request:
-    branches:
+  pull_request_target:
+    branches-ignore:
       - main
-      - develop
 
 permissions: write-all
   
