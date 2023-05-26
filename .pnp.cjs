@@ -33,6 +33,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:14.0.0"],\
             ["@types/jest", "npm:29.5.1"],\
+            ["@types/navermaps", "npm:3.6.5"],\
             ["@types/node", "npm:18.16.3"],\
             ["@types/react", "npm:18.2.0"],\
             ["@types/react-dom", "npm:18.2.1"],\
@@ -1781,6 +1782,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/geojson", [\
+        ["npm:7946.0.10", {\
+          "packageLocation": "./.yarn/cache/@types-geojson-npm-7946.0.10-deca8d1263-12c407c2dc.zip/node_modules/@types/geojson/",\
+          "packageDependencies": [\
+            ["@types/geojson", "npm:7946.0.10"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/graceful-fs", [\
         ["npm:4.1.6", {\
           "packageLocation": "./.yarn/cache/@types-graceful-fs-npm-4.1.6-1eadcf742d-c3070ccdc9.zip/node_modules/@types/graceful-fs/",\
@@ -1857,6 +1867,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-json5-npm-0.0.29-f63a7916bd-e60b153664.zip/node_modules/@types/json5/",\
           "packageDependencies": [\
             ["@types/json5", "npm:0.0.29"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/navermaps", [\
+        ["npm:3.6.5", {\
+          "packageLocation": "./.yarn/cache/@types-navermaps-npm-3.6.5-9ccc188408-2f01fb53e3.zip/node_modules/@types/navermaps/",\
+          "packageDependencies": [\
+            ["@types/navermaps", "npm:3.6.5"],\
+            ["@types/geojson", "npm:7946.0.10"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4832,6 +4852,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:14.0.0"],\
             ["@types/jest", "npm:29.5.1"],\
+            ["@types/navermaps", "npm:3.6.5"],\
             ["@types/node", "npm:18.16.3"],\
             ["@types/react", "npm:18.2.0"],\
             ["@types/react-dom", "npm:18.2.1"],\
