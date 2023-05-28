@@ -1,5 +1,3 @@
-import '@/styles/globals.css';
-
 import {
   Hydrate,
   QueryClient,
