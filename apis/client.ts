@@ -1,14 +1,13 @@
-import axios from 'axios';
-
-import { ApiError } from './error';
+import axios from "axios";
+import { ApiError } from "./error";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const client = axios.create({
   baseURL: BASE_URL,
   headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
+    Accept: "application/json",
+    "Content-Type": "application/json",
   },
 });
 
@@ -18,7 +17,7 @@ client.interceptors.request.use(
   },
   (error) => {
     throw error;
-  },
+  }
 );
 
 client.interceptors.response.use(
@@ -34,7 +33,7 @@ client.interceptors.response.use(
     }
 
     throw error;
-  },
+  }
 );
 
 export default client;

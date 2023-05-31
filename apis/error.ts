@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import { AxiosError } from "axios";
 
 // types
 const HTTP_STATUS = {
@@ -38,22 +38,22 @@ export class ApiError<T = unknown> extends AxiosError<T> {
 
   setErrorName = (status: number) => {
     if (status === HTTP_STATUS.INVALID_USER) {
-      this.name = 'InvalidUserError';
+      this.name = "InvalidUserError";
     }
 
     if (status === HTTP_STATUS.NOT_FOUND) {
-      this.name = 'NotFoundError';
+      this.name = "NotFoundError";
     }
 
     if (status === HTTP_STATUS.INTERNAL_SERVER) {
-      this.name = 'InternalServerError';
+      this.name = "InternalServerError";
     }
 
     if (status > HTTP_STATUS.INTERNAL_SERVER) {
-      this.name = 'OtherServerError';
+      this.name = "OtherServerError";
     }
 
-    console.warn('에러 발생 !!');
+    console.warn("에러 발생 !!");
     console.warn(this.name);
   };
 }
