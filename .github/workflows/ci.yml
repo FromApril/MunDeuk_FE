@@ -29,8 +29,9 @@ jobs:
           yarn
           yarn test:coverage
       - uses: actions/upload-artifact@master
-        name: Unit-test coverage
-        path: coverage
+        with:  
+          name: Unit-test coverage
+          path: coverage
 
   coverage:
     needs: unit-test
