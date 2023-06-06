@@ -53,6 +53,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest", "virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:29.5.0"],\
             ["jest-environment-jsdom", "virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:29.5.0"],\
             ["next", "virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:13.3.4"],\
+            ["next-router-mock", "virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:0.9.3"],\
             ["postcss", "npm:8.4.23"],\
             ["prettier", "npm:2.8.8"],\
             ["react", "npm:18.2.0"],\
@@ -4905,6 +4906,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest", "virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:29.5.0"],\
             ["jest-environment-jsdom", "virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:29.5.0"],\
             ["next", "virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:13.3.4"],\
+            ["next-router-mock", "virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:0.9.3"],\
             ["postcss", "npm:8.4.23"],\
             ["prettier", "npm:2.8.8"],\
             ["react", "npm:18.2.0"],\
@@ -7535,6 +7537,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "react-dom",\
             "react",\
             "sass"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["next-router-mock", [\
+        ["npm:0.9.3", {\
+          "packageLocation": "./.yarn/cache/next-router-mock-npm-0.9.3-a0b06e929c-5e8a6ffd55.zip/node_modules/next-router-mock/",\
+          "packageDependencies": [\
+            ["next-router-mock", "npm:0.9.3"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:0.9.3", {\
+          "packageLocation": "./.yarn/__virtual__/next-router-mock-virtual-a928688bac/0/cache/next-router-mock-npm-0.9.3-a0b06e929c-5e8a6ffd55.zip/node_modules/next-router-mock/",\
+          "packageDependencies": [\
+            ["next-router-mock", "virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:0.9.3"],\
+            ["@types/next", null],\
+            ["@types/react", "npm:18.2.0"],\
+            ["next", "virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:13.3.4"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/next",\
+            "@types/react",\
+            "next",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
