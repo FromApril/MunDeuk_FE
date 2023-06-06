@@ -12,6 +12,7 @@ const config = {
   clearMocks: true,
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testEnvironment: 'jest-environment-jsdom',
+  coverageReporters: ['json'],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

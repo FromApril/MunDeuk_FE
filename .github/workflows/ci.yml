@@ -28,6 +28,25 @@ jobs:
         run: |
           yarn
           yarn test:coverage
+      - uses: actions/upload-artifact@master
+        name: Unit-test coverage
+        path: coverage
+
+  coverage:
+    needs: unit-test
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@master
+        with:
+          name: Unit-test coverage
+          path: coverage
+      - uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          coverage-file: './coverage/coverage-final.json'
+          base-coverage-file: './coverage/coverage-final.json'
 
   e2e-test:
     needs: build
