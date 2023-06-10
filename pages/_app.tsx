@@ -9,6 +9,7 @@ import type { AppProps } from 'next/app';
 import Script from 'next/script';
 import { useState } from 'react';
 import { RecoilRoot } from 'recoil';
+
 import PageLayout from '@/components/layouts/PageLayout';
 import RootErrorBoundary from '@/components/layouts/RootErrorBoundary';
 
@@ -26,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
   );
 
   return (
-    <>
+    <RootErrorBoundary>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <RecoilRoot>
@@ -41,6 +42,6 @@ export default function App({ Component, pageProps }: AppProps) {
         </Hydrate>
         {/* <ReactQueryDevtools initialIsOpen={false} position="top-right" /> */}
       </QueryClientProvider>
-    </>
+    </RootErrorBoundary>
   );
 }
