@@ -1,5 +1,8 @@
+import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import React from 'react';
+
+import { layouts } from '@/styles/layouts';
 
 // TODOS
 // 1. 라우팅 페이지는 임의로 지정
@@ -15,7 +18,7 @@ export default function Gnb() {
   };
 
   return (
-    <nav className="bg-slate-300 fixed left-50 bottom-0 translate-x-[-1px] w-[375px] h-[50px] grid grid-cols-3 items-center text-center">
+    <StyledGnb>
       <div>
         <i
           className="fa-solid fa-house"
@@ -37,6 +40,20 @@ export default function Gnb() {
           onClick={() => goPage('/myPage')}
         />
       </div>
-    </nav>
+    </StyledGnb>
   );
 }
+
+const StyledGnb = styled.nav`
+  background-color: #ddd;
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  width: ${layouts.deviceWidth};
+  height: ${layouts.gnb};
+`;

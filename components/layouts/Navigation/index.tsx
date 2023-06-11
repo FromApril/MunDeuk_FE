@@ -1,6 +1,7 @@
+import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 
-import Icons from '@/components/common/Icons';
+import Icon from '@/components/common/Icon';
 
 type NavigationProps = {
   isBack?: boolean;
@@ -20,10 +21,10 @@ export default function Navigation({
   const router = useRouter();
 
   return (
-    <div className="flex items-center px-5 h-11">
-      <div className="flex-none">
+    <StyledNavigation>
+      <div>
         {isBack && (
-          <Icons
+          <Icon
             name="ArrowRight"
             width={20}
             height={20}
@@ -31,14 +32,33 @@ export default function Navigation({
           />
         )}
       </div>
-      <div className="flex-auto font-bold text-center">{title}</div>
-      <div className="flex-none">
-        {isComplete && (
-          <div className="font-bold cursor-pointer" onClick={onComplete}>
-            완료
-          </div>
-        )}
-      </div>
-    </div>
+      <div>{title}</div>
+      <div>{isComplete && <div onClick={onComplete}>완료</div>}</div>
+    </StyledNavigation>
   );
 }
+
+const StyledNavigation = styled.div`
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 50px;
+
+  & > div:nth-of-type(1) {
+    flex: 0;
+    cursor: pointer;
+  }
+
+  & > div:nth-of-type(2) {
+    flex: auto;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  & > div:nth-of-type(3) {
+    flex: 0 0 30px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+`;
