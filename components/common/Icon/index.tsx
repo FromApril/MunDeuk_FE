@@ -2,7 +2,7 @@ import * as SvgIcons from '@/public/icons';
 
 type IconsName = keyof typeof SvgIcons;
 
-type IconsProps = {
+type IconProps = {
   name: IconsName;
   width: number;
   height: number;
@@ -11,13 +11,8 @@ type IconsProps = {
   onClick?: () => void;
 };
 
-export default function Icons(props: IconsProps) {
+export default function Icon(props: IconProps) {
   const RenderedIcon = SvgIcons[props.name];
 
-  return (
-    <RenderedIcon
-      className="inline-block align-top cursor-pointer"
-      {...props}
-    />
-  );
+  return <RenderedIcon {...props} />;
 }
