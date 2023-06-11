@@ -14,5 +14,10 @@ type IconsProps = {
 export default function Icons(props: IconsProps) {
   const RenderedIcon = SvgIcons[props.name];
 
-  return <RenderedIcon {...props} />;
+  return (
+    <RenderedIcon
+      className="inline-block align-top cursor-pointer"
+      {...props}
+    />
+  );
 }

@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  * {
+    font-family: Apple SD Gothic Neo;
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
 }
