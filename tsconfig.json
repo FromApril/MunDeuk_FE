@@ -19,6 +19,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "./types/global.d.ts", "**/*.ts", "**/*.tsx", "libs/naverMap/markerClustering.js"],
+  "include": ["./types/*.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx", "libs/naverMap/markerClustering.js"],
   "exclude": ["node_modules", "cypress"]
 }
