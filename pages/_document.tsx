@@ -9,7 +9,7 @@ export default function Document() {
         <Main />
         <div id="portal" />
         <Script
-          src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NCLOUD_CLIENT_ID}`}
+          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_API_KEY}&autoload=false`}
           strategy="beforeInteractive"
         />
         <NextScript />

@@ -1,4 +1,4 @@
-import '@/styles/global.css';
+import '@/styles/normalize.css';
 
 import {
   Hydrate,
@@ -9,8 +9,10 @@ import type { AppProps } from 'next/app';
 import Script from 'next/script';
 import { useState } from 'react';
 import { RecoilRoot } from 'recoil';
+
 import PageLayout from '@/components/layouts/PageLayout';
 import RootErrorBoundary from '@/components/layouts/RootErrorBoundary';
+import GlobalStyle from '@/styles/Global';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -26,12 +28,13 @@ export default function App({ Component, pageProps }: AppProps) {
   );
 
   return (
-    <>
+    <RootErrorBoundary>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <RecoilRoot>
             <PageLayout>
               <Component {...pageProps} />
+              <GlobalStyle />
               <Script
                 src="https://kit.fontawesome.com/32d07c7523.js"
                 crossOrigin="anonymous"
@@ -41,6 +44,6 @@ export default function App({ Component, pageProps }: AppProps) {
         </Hydrate>
         {/* <ReactQueryDevtools initialIsOpen={false} position="top-right" /> */}
       </QueryClientProvider>
-    </>
+    </RootErrorBoundary>
   );
 }
