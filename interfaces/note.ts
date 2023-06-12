@@ -1,6 +1,6 @@
 export type EmotionType = 'Depressed' | 'Flutter' | 'Glad' | 'Touched';
 
-interface Note {
+export interface Note {
   createAt: string;
   updatedAt: string;
   content: string;
