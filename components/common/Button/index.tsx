@@ -5,24 +5,45 @@ import { layouts } from '@/styles/layouts';
 
 interface ButtonProps extends PropsWithChildren {
   disabled?: boolean;
-  onClick: () => void;
+  variant: 'primary' | 'dashed';
+  onClick?: () => void;
 }
 
-export default function Button({ disabled, children, onClick }: ButtonProps) {
+export default function Button({
+  variant,
+  disabled,
+  children,
+  onClick,
+}: ButtonProps) {
   return (
-    <StyledButton disabled={disabled} onClick={onClick}>
+    <StyledButton variant={variant} disabled={disabled} onClick={onClick}>
       {children}
     </StyledButton>
   );
 }
 
-const StyledButton = styled.button<{ disabled?: boolean }>`
-  background-color: #000;
+const StyledButton = styled.button<{
+  variant: ButtonProps['variant'];
+  disabled: ButtonProps['disabled'];
+}>`
   border-radius: 8px;
-  color: #fff;
-  font-weight: bold;
   width: 100%;
   height: ${layouts.button};
 
+  ${(props) =>
+    props.variant === 'primary' &&
+    `
+    background-color: #000;
+    color: #fff;
+    font-weight: 700;
+  `}
+  ${(props) =>
+    props.variant === 'dashed' &&
+    `
+    border: dashed 1px #e4e4e4;
+    background-color: #fff;
+    color: #555;
+    font-weight: 600;
+  `}
   ${(props) => props.disabled && `background-color: #ddd;`}
 `;

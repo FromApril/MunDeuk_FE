@@ -13,7 +13,7 @@ import { layouts } from '@/styles/layouts';
 export default function Gnb() {
   const router = useRouter();
 
-  const goPage = (pathname: '/home' | '/addPost' | '/myPage') => {
+  const goPage = (pathname: '/home' | '/noteWrite?page=1' | '/myPage') => {
     router.push(pathname);
   };
 
@@ -30,7 +30,7 @@ export default function Gnb() {
         <i
           className="fa-solid fa-plus"
           aria-label="쪽지작성"
-          onClick={() => goPage('/addPost')}
+          onClick={() => goPage('/noteWrite?page=1')}
         />
       </div>
       <div>
