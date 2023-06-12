@@ -1,4 +1,5 @@
 import { ApiResponse } from '@/interfaces/common';
+import { Note } from '@/interfaces/note';
 
 import client from './client';
 
