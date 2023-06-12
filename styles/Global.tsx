@@ -33,6 +33,7 @@ const globalStyle = css`
 
   svg {
     display: inline-block;
+    cursor: pointer;
   }
 `;
 
