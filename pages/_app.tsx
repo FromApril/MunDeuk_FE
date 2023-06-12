@@ -1,4 +1,4 @@
-import '@/styles/global.css';
+import '@/styles/normalize.css';
 
 import {
   Hydrate,
@@ -12,6 +12,7 @@ import { RecoilRoot } from 'recoil';
 
 import PageLayout from '@/components/layouts/PageLayout';
 import RootErrorBoundary from '@/components/layouts/RootErrorBoundary';
+import GlobalStyle from '@/styles/Global';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -33,6 +34,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <RecoilRoot>
             <PageLayout>
               <Component {...pageProps} />
+              <GlobalStyle />
               <Script
                 src="https://kit.fontawesome.com/32d07c7523.js"
                 crossOrigin="anonymous"
