@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import React, { PropsWithChildren } from 'react';
 
+import { layouts } from '@/styles/layouts';
+
 import Gnb from '../Gnb';
 
 export default function PageLayout({ children }: PropsWithChildren) {
@@ -20,8 +22,11 @@ export default function PageLayout({ children }: PropsWithChildren) {
 
 const StyledPageLayout = styled.div`
   margin: 0 auto;
-  width: 375px;
   height: 100vh;
-  border-left: solid 1px #000;
-  border-right: solid 1px #000;
+
+  @media screen and (min-width: ${layouts.deviceWidth}) {
+    width: ${layouts.deviceWidth};
+    border-left: solid 1px #000;
+    border-right: solid 1px #000;
+  }
 `;
