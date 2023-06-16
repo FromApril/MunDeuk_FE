@@ -2,11 +2,13 @@ import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import React, { PropsWithChildren } from 'react';
 
+import useLocation from '@/hooks/useLocation';
 import { layouts } from '@/styles/layouts';
 
 import Gnb from '../Gnb';
 
 export default function PageLayout({ children }: PropsWithChildren) {
+  useLocation();
   const router = useRouter();
 
   const isShowGnb =
@@ -20,9 +22,10 @@ export default function PageLayout({ children }: PropsWithChildren) {
   );
 }
 
+// styled
 const StyledPageLayout = styled.div`
   margin: 0 auto;
-  height: 100vh;
+  min-height: 100vh;
 
   @media screen and (min-width: ${layouts.deviceWidth}) {
     width: ${layouts.deviceWidth};
