@@ -1,10 +1,9 @@
-import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 import Button from '@/components/common/Button';
+import BottomLayout from '@/components/layouts/BottomLayout';
 import Navigation from '@/components/layouts/Navigation';
-import { layouts } from '@/styles/layouts';
+import PageContainer from '@/components/layouts/PageContainer';
 
 export default function SelectLocation() {
   const router = useRouter();
@@ -12,25 +11,13 @@ export default function SelectLocation() {
   const goNextPage = () => router.push('/noteWrite?page=2');
 
   return (
-    <Container>
+    <PageContainer>
       <Navigation isBack title="위치 설정" />
-      <BottomButton>
+      <BottomLayout>
         <Button variant="primary" onClick={goNextPage}>
           다음
         </Button>
-      </BottomButton>
-    </Container>
+      </BottomLayout>
+    </PageContainer>
   );
 }
-
-const Container = styled.div`
-  height: 100vh;
-`;
-
-const BottomButton = styled.div`
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  width: ${layouts.deviceWidth};
-  bottom: ${layouts.gnb};
-`;

@@ -1,15 +1,16 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { useRecoilValue } from 'recoil';
 
 import Button from '@/components/common/Button';
+import BottomLayout from '@/components/layouts/BottomLayout';
 import Navigation from '@/components/layouts/Navigation';
+import PageContainer from '@/components/layouts/PageContainer';
 import MusicContent from '@/components/pages/noteWrite/MusicContent';
 import PhotoContent from '@/components/pages/noteWrite/PhotoContent';
 import TextContent from '@/components/pages/noteWrite/TextContent';
 import { textAtom } from '@/recoil/noteWrite/atoms';
-import { positionFixedBottom } from '@/styles/common';
 import { layouts } from '@/styles/layouts';
 
 export default function ContentsWrite() {
@@ -19,7 +20,7 @@ export default function ContentsWrite() {
   const goNextPage = () => router.push('/noteWrite?page=4');
 
   return (
-    <Container>
+    <PageContainer css={containerCss}>
       <Navigation isBack title="쪽지 작성" />
       <ContentBody>
         <TextSection>
@@ -34,24 +35,25 @@ export default function ContentsWrite() {
           <Description>오늘의 노래</Description>
           <MusicContent />
         </MusicSection>
-        <BottomButton>
+        <BottomLayout>
           <Button variant="primary" disabled={text === ''} onClick={goNextPage}>
             완료
           </Button>
-        </BottomButton>
+        </BottomLayout>
       </ContentBody>
-    </Container>
+    </PageContainer>
   );
 }
+
+// styled
+const containerCss = css`
+  padding-bottom: calc(${layouts.button} * 2);
+`;
 
 const Description = styled.div`
   margin-bottom: 8px;
   font-size: 13px;
   color: #777;
-`;
-
-const Container = styled.div`
-  height: 100vh;
 `;
 
 const ContentBody = styled.div`
@@ -68,12 +70,4 @@ const PhotoSection = styled.section`
 
 const MusicSection = styled.section`
   margin-top: 20px;
-`;
-
-const BottomButton = styled.div`
-  ${positionFixedBottom};
-  left: 50%;
-  bottom: ${layouts.gnb};
-  transform: translateX(-50%);
-  width: calc(${layouts.deviceWidth} - 20px);
 `;
