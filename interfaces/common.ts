@@ -1,8 +1,8 @@
 export type NumberOrString = number | string;
 
 export type Location = {
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
 };
 
 export type ApiResponse<T> = Promise<{

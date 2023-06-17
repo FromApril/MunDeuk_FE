@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 
 import { EmotionType } from '@/interfaces/note';
 
-export const LocationAtom = atom({
+export const locationAtom = atom({
   key: '/noteWrite/locationAtom',
   default: {
     latitude: 0,

@@ -1,5 +1,5 @@
 const layouts = {
-  deviceWidth: '375px',
+  deviceWidth: '450px',
   navigation: '50px',
   button: '50px',
   gnb: '50px',
