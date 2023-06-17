@@ -1,27 +1,17 @@
-import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import { userAtom } from '@/recoil/user/atoms';
 
 export default function useLocation() {
-  const [_, setUser] = useRecoilState(userAtom);
+  const { location } = useRecoilValue(userAtom);
+  const { latitude, longitude } = location;
 
-  useEffect(() => {
-    // TODO: 실패했을 때 액션
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position.coords.latitude, position.coords.longitude);
+  const isLoading = latitude === 0 && longitude === 0;
+  const isError = latitude === -1 && longitude === -1;
 
-        const { latitude, longitude } = position.coords;
-        const location = {
-          latitude,
-          longitude,
-        };
-
-        setUser({
-          location,
-        });
-      });
-    }
-  }, []);
+  return {
+    location,
+    isLoading,
+    isError,
+  };
 }
