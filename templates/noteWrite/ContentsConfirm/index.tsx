@@ -1,15 +1,17 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 
 import EmotionIcon from '@/components/common/EmotionIcon';
 import Icon from '@/components/common/Icon';
 import Navigation from '@/components/layouts/Navigation';
-import SelectEmotionModal from '@/components/pages/noteWrite/SelectEmotionModal';
+import PageContainer from '@/components/layouts/PageContainer';
+import EmotionSelectModal from '@/components/pages/noteWrite/EmotionSelectModal';
 import {
   emotionAtom,
+  locationAtom,
   musicAtom,
   photosAtom,
   textAtom,
@@ -19,19 +21,28 @@ import { layouts } from '@/styles/layouts';
 
 export default function ContentsConfirm() {
   const router = useRouter();
+  const location = useRecoilValue(locationAtom);
   const photos = useRecoilValue(photosAtom);
   const music = useRecoilValue(musicAtom);
   const emotion = useRecoilValue(emotionAtom);
+  const resetLocation = useResetRecoilState(locationAtom);
   const resetText = useResetRecoilState(textAtom);
   const resetPhotos = useResetRecoilState(photosAtom);
   const resetMusic = useResetRecoilState(musicAtom);
   const resetEmotion = useResetRecoilState(emotionAtom);
 
-  const handleComplete = () => {
+  console.log(location, photos, emotion, music);
+
+  const handleResetStates = () => {
+    resetLocation();
     resetText();
     resetPhotos();
     resetMusic();
     resetEmotion();
+  };
+
+  const handleComplete = () => {
+    handleResetStates();
 
     router.push('/noteWrite?page=5');
   };
@@ -39,7 +50,7 @@ export default function ContentsConfirm() {
   const today = `${dayjs().get('M') + 1}월 ${dayjs().get('D')}일`;
 
   return (
-    <Container>
+    <PageContainer css={containerCss}>
       <Navigation isBack title="쪽지 작성" />
       <SelectedEmotion>
         <EmotionIcon name={emotion} width={300} height={300} fill="#FF7AC5" />
@@ -62,16 +73,16 @@ export default function ContentsConfirm() {
           </div>
         </SavedContents>
       </SelectedEmotion>
-      <SelectEmotionModal
+      <EmotionSelectModal
         emotion={emotion}
         onClick={() => null}
         onComplete={handleComplete}
       />
-    </Container>
+    </PageContainer>
   );
 }
 
-const Container = styled.div`
+const containerCss = css`
   background-color: #000;
   height: 100vh;
 
@@ -79,14 +90,15 @@ const Container = styled.div`
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
-    bottom: ${layouts.gnb};
-    width: ${layouts.deviceWidth};
+    bottom: 0;
+    width: 100%;
+    max-width: ${layouts.deviceWidth};
   }
 `;
 
 const SelectedEmotion = styled.div`
   position: relative;
-  height: calc(100vh - ${layouts.navigation} - ${layouts.gnb} - 196px);
+  height: calc(100vh - ${layouts.navigation} - 196px);
 
   & > svg {
     ${positionAbsoluteXYCenter};

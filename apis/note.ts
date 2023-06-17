@@ -1,22 +1,19 @@
-import { ApiResponse } from '@/interfaces/common';
+import { ApiResponse, Location } from '@/interfaces/common';
 import { Note } from '@/interfaces/note';
 
 import client from './client';
 
-export const getNote = (location: Location): ApiResponse<Note[]> => {
+export const getNotes = (location: Location): ApiResponse<Note[]> => {
   return client.get('/note', { params: location });
 };
 
 export const postNote = (payload: {
-  content: 'string';
-  latitude: 0;
-  longitude: 0;
-  writerId: 0;
-  id: 0;
-  ownerId: 0;
-  originId: 0;
+  content: string;
+  latitude: number;
+  longitude: number;
+  writerId: number;
 }): ApiResponse<null> => {
-  return client.post('/reservations', payload);
+  return client.post('/note', payload);
 };
 
 export const putNote = () => {
@@ -27,5 +24,5 @@ export const deleteNote = (payload: {
   memberId: number;
   noteId: number;
 }): ApiResponse<null> => {
-  return client.delete('/delete', { params: payload });
+  return client.delete('/note', { params: payload });
 };

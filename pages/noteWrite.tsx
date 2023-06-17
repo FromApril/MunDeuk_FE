@@ -1,11 +1,10 @@
 import { useRouter } from 'next/router';
-import React from 'react';
 
 import ContentsConfirm from '@/templates/noteWrite/ContentsConfirm';
 import ContentsWrite from '@/templates/noteWrite/ContentsWrite';
+import EmotionSelect from '@/templates/noteWrite/EmotionSelect';
+import LocationSelect from '@/templates/noteWrite/LocationSelect';
 import NoteWriteComplete from '@/templates/noteWrite/NoteWriteComplete';
-import SelectEmotion from '@/templates/noteWrite/SelectEmotion';
-import SelectLocation from '@/templates/noteWrite/SelectLocation';
 
 export default function NoteWritePage() {
   const router = useRouter();
@@ -14,8 +13,8 @@ export default function NoteWritePage() {
 
   return (
     <main>
-      {page === 1 && <SelectLocation />}
-      {page === 2 && <SelectEmotion />}
+      {page === 1 && <LocationSelect />}
+      {page === 2 && <EmotionSelect />}
       {page === 3 && <ContentsWrite />}
       {page === 4 && <ContentsConfirm />}
       {page === 5 && <NoteWriteComplete />}

@@ -5,9 +5,6 @@ import Gnb from './index';
 
 describe('<Gnb/>', () => {
   const renderComponent = () => render(<Gnb />);
-  const HOME_PATH = '/home';
-  const ADD_POST_PATH = '/addPost';
-  const MY_PAGE_PATH = '/myPage';
 
   beforeEach(() => {
     renderComponent();
@@ -28,7 +25,7 @@ describe('<Gnb/>', () => {
     fireEvent.click(Icon);
 
     expect(mockRouter).toMatchObject({
-      pathname: HOME_PATH,
+      pathname: '/home',
     });
   });
 
@@ -37,7 +34,7 @@ describe('<Gnb/>', () => {
     fireEvent.click(Icon);
 
     expect(mockRouter).toMatchObject({
-      pathname: ADD_POST_PATH,
+      pathname: '/noteWrite',
     });
   });
 
@@ -46,7 +43,7 @@ describe('<Gnb/>', () => {
     fireEvent.click(Icon);
 
     expect(mockRouter).toMatchObject({
-      pathname: MY_PAGE_PATH,
+      pathname: '/myPage',
     });
   });
 });

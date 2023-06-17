@@ -54,6 +54,7 @@ const StyledGnb = styled.nav`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  width: ${layouts.deviceWidth};
+  width: 100%;
+  max-width: ${layouts.deviceWidth};
   height: ${layouts.gnb};
 `;

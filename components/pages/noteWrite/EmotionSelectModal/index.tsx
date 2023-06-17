@@ -23,17 +23,17 @@ const EMOTIONS = [
   },
 ] as const;
 
-type SelectEmotionModalProps = {
+type EmotionSelectModalProps = {
   emotion: EmotionType;
   onClick: (emotion: EmotionType) => void;
   onComplete: () => void;
 };
 
-export default function SelectEmotionModal({
+function EmotionSelectModal({
   emotion,
   onClick,
   onComplete,
-}: SelectEmotionModalProps) {
+}: EmotionSelectModalProps) {
   return (
     <ModalContainer>
       <ModalHeader>
@@ -58,6 +58,8 @@ export default function SelectEmotionModal({
     </ModalContainer>
   );
 }
+
+export default React.memo(EmotionSelectModal);
 
 const ModalContainer = styled.div`
   background-color: #fff;
