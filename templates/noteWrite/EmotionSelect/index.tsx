@@ -6,12 +6,21 @@ import { useRecoilState } from 'recoil';
 import EmotionIcon from '@/components/common/EmotionIcon';
 import Navigation from '@/components/layouts/Navigation';
 import PageContainer from '@/components/layouts/PageContainer';
-import SelectEmotionModal from '@/components/pages/noteWrite/SelectEmotionModal';
+import EmotionSelectModal from '@/components/pages/noteWrite/EmotionSelectModal';
 import { emotionAtom } from '@/recoil/noteWrite/atoms';
 import { positionAbsoluteXYCenter } from '@/styles/common';
 import { layouts } from '@/styles/layouts';
 
-export default function SelectEmotion() {
+export default function EmotionSelect() {
+  return (
+    <PageContainer css={containerCss}>
+      <Navigation isBack title="오늘의 감정" />
+      <Emotion />
+    </PageContainer>
+  );
+}
+
+function Emotion() {
   const router = useRouter();
   const [emotion, setEmotion] = useRecoilState(emotionAtom);
 
@@ -20,17 +29,16 @@ export default function SelectEmotion() {
   };
 
   return (
-    <PageContainer css={containerCss}>
-      <Navigation isBack title="오늘의 감정" />
+    <EmotionContainer>
       <SelectedEmotion>
         <EmotionIcon name={emotion} width={200} height={200} fill="#ddd" />
       </SelectedEmotion>
-      <SelectEmotionModal
+      <EmotionSelectModal
         emotion={emotion}
         onClick={setEmotion}
         onComplete={handleComplete}
       />
-    </PageContainer>
+    </EmotionContainer>
   );
 }
 
@@ -46,6 +54,8 @@ const containerCss = css`
     max-width: ${layouts.deviceWidth};
   }
 `;
+
+const EmotionContainer = styled.div``;
 
 const SelectedEmotion = styled.div`
   position: relative;

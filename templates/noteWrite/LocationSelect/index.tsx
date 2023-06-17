@@ -5,7 +5,7 @@ import BottomLayout from '@/components/layouts/BottomLayout';
 import Navigation from '@/components/layouts/Navigation';
 import PageContainer from '@/components/layouts/PageContainer';
 
-export default function SelectLocation() {
+export default function LocationSelect() {
   const router = useRouter();
 
   const goNextPage = () => router.push('/noteWrite?page=2');

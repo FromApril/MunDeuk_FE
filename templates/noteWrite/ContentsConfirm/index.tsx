@@ -8,7 +8,7 @@ import EmotionIcon from '@/components/common/EmotionIcon';
 import Icon from '@/components/common/Icon';
 import Navigation from '@/components/layouts/Navigation';
 import PageContainer from '@/components/layouts/PageContainer';
-import SelectEmotionModal from '@/components/pages/noteWrite/SelectEmotionModal';
+import EmotionSelectModal from '@/components/pages/noteWrite/EmotionSelectModal';
 import {
   emotionAtom,
   musicAtom,
@@ -63,7 +63,7 @@ export default function ContentsConfirm() {
           </div>
         </SavedContents>
       </SelectedEmotion>
-      <SelectEmotionModal
+      <EmotionSelectModal
         emotion={emotion}
         onClick={() => null}
         onComplete={handleComplete}
