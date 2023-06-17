@@ -1,25 +1,32 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
-import useLocation from '@/hooks/useLocation';
+import useGeoLocation from '@/hooks/useGeoLocation';
 import { layouts } from '@/styles/layouts';
 
 import Gnb from '../Gnb';
 
 export default function PageLayout({ children }: PropsWithChildren) {
-  useLocation();
+  useGeoLocation();
+
+  return (
+    <StyledPageLayout>
+      {children}
+      <GnbContainer />
+    </StyledPageLayout>
+  );
+}
+
+function GnbContainer() {
   const router = useRouter();
 
   const isShowGnb =
     router.pathname === '/home' || router.pathname === '/myPage';
 
-  return (
-    <StyledPageLayout>
-      {children}
-      {isShowGnb && <Gnb />}
-    </StyledPageLayout>
-  );
+  if (!isShowGnb) return null;
+
+  return <Gnb />;
 }
 
 // styled
