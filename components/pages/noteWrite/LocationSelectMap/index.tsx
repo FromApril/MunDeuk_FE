@@ -1,20 +1,40 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 
 import MapLoading from '@/components/common/MapLoading';
 import useKakaoMap from '@/hooks/useKakaoMap';
 import useLocation from '@/hooks/useLocation';
+import { locationAtom } from '@/recoil/noteWrite/atoms';
 import { layouts } from '@/styles/layouts';
 
 export default function LocationSelectMap() {
   const { isLoading, isError, location } = useLocation();
-  const { createMap } = useKakaoMap();
+  const { createMap, createMarker } = useKakaoMap();
+  const setLocation = useSetRecoilState(locationAtom);
 
   useEffect(() => {
     if (isLoading) return;
 
-    createMap('map', location);
+    createMap('map', location).then((res) => {
+      const map = res;
+      const marker = createMarker(location);
+
+      window.kakao.maps.event.addListener(marker, 'dragend', function () {
+        const location = marker.getPosition();
+
+        console.log(location.La, location.Ma);
+
+        setLocation({
+          latitude: location.La,
+          longitude: location.Ma,
+        });
+      });
+
+      marker.setMap(map);
+      marker.setDraggable(true);
+    });
   }, [location]);
 
   if (isLoading || isError) {
