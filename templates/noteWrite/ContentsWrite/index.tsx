@@ -14,11 +14,6 @@ import { textAtom } from '@/recoil/noteWrite/atoms';
 import { layouts } from '@/styles/layouts';
 
 export default function ContentsWrite() {
-  const router = useRouter();
-  const text = useRecoilValue(textAtom);
-
-  const goNextPage = () => router.push('/noteWrite?page=4');
-
   return (
     <PageContainer css={containerCss}>
       <Navigation isBack title="쪽지 작성" />
@@ -35,13 +30,24 @@ export default function ContentsWrite() {
           <Description>오늘의 노래</Description>
           <MusicContent />
         </MusicSection>
-        <BottomLayout>
-          <Button variant="primary" disabled={text === ''} onClick={goNextPage}>
-            완료
-          </Button>
-        </BottomLayout>
       </ContentBody>
+      <BottomButton />
     </PageContainer>
+  );
+}
+
+function BottomButton() {
+  const router = useRouter();
+  const text = useRecoilValue(textAtom);
+
+  const goNextPage = () => router.push('/noteWrite?page=4');
+
+  return (
+    <BottomLayout>
+      <Button variant="primary" disabled={text === ''} onClick={goNextPage}>
+        완료
+      </Button>
+    </BottomLayout>
   );
 }
 
