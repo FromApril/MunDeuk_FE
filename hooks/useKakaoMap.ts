@@ -19,21 +19,37 @@ export default function useKakaoMap() {
     location: Location,
     options?: MapOption,
   ) => {
-    window.kakao.maps.load(() => {
-      const container = document.getElementById(mapId);
-      const defaultOptions = {
-        center: new window.kakao.maps.LatLng(
-          location.latitude,
-          location.longitude,
-        ),
-        level: 3,
-      };
+    return new Promise((resolve, reject) => {
+      window.kakao.maps.load(() => {
+        const container = document.getElementById(mapId);
+        const defaultOptions = {
+          center: new window.kakao.maps.LatLng(
+            location.latitude,
+            location.longitude,
+          ),
+          level: 3,
+        };
 
-      new window.kakao.maps.Map(container, options || defaultOptions);
+        resolve(
+          new window.kakao.maps.Map(container, options || defaultOptions),
+        );
+      });
+    });
+  };
+
+  const createMarker = (location: Location) => {
+    const markerPosition = new window.kakao.maps.LatLng(
+      location.latitude,
+      location.longitude,
+    );
+
+    return new window.kakao.maps.Marker({
+      position: markerPosition,
     });
   };
 
   return {
     createMap,
+    createMarker,
   };
 }
