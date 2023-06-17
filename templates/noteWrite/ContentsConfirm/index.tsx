@@ -11,6 +11,7 @@ import PageContainer from '@/components/layouts/PageContainer';
 import EmotionSelectModal from '@/components/pages/noteWrite/EmotionSelectModal';
 import {
   emotionAtom,
+  locationAtom,
   musicAtom,
   photosAtom,
   textAtom,
@@ -20,19 +21,28 @@ import { layouts } from '@/styles/layouts';
 
 export default function ContentsConfirm() {
   const router = useRouter();
+  const location = useRecoilValue(locationAtom);
   const photos = useRecoilValue(photosAtom);
   const music = useRecoilValue(musicAtom);
   const emotion = useRecoilValue(emotionAtom);
+  const resetLocation = useResetRecoilState(locationAtom);
   const resetText = useResetRecoilState(textAtom);
   const resetPhotos = useResetRecoilState(photosAtom);
   const resetMusic = useResetRecoilState(musicAtom);
   const resetEmotion = useResetRecoilState(emotionAtom);
 
-  const handleComplete = () => {
+  console.log(location, photos, emotion, music);
+
+  const handleResetStates = () => {
+    resetLocation();
     resetText();
     resetPhotos();
     resetMusic();
     resetEmotion();
+  };
+
+  const handleComplete = () => {
+    handleResetStates();
 
     router.push('/noteWrite?page=5');
   };
