@@ -24,7 +24,7 @@ import { layouts } from '@/styles/layouts';
 
 export default function ContentsConfirm() {
   const router = useRouter();
-  const { mutate, error, isSuccess } = useMutation(postNote);
+  const { mutate } = useMutation(postNote);
 
   const text = useRecoilValue(textAtom);
   const location = useRecoilValue(locationAtom);
@@ -67,17 +67,18 @@ export default function ContentsConfirm() {
     return form;
   };
 
-  const submitForm = async () => {
+  const submitForm = () => {
     const form = getFormData();
 
-    await mutate(form);
-
-    if (isSuccess) {
-      handleComplete();
-    } else {
-      alert('쪽지 작성하기를 실패했습니다.');
-      console.log(error);
-    }
+    mutate(form, {
+      onSuccess: () => {
+        handleComplete();
+      },
+      onError: (error) => {
+        alert('쪽지 작성하기를 실패했습니다.');
+        console.log(error);
+      },
+    });
   };
 
   const handleComplete = () => {
