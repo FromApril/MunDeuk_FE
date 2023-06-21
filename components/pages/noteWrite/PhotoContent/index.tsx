@@ -19,6 +19,21 @@ export default function PhotoContent() {
         return;
       }
 
+      // 파일사이즈 최대 2MB 체크
+      const MAX_SIZE = 2 * Math.pow(2, 20);
+      const filesSize = Array.from(files).reduce(
+        (acc, file) => acc + file.size,
+        0,
+      );
+
+      console.log('파일 사이즈');
+      console.log(filesSize);
+
+      if (filesSize > MAX_SIZE) {
+        alert('이미지 사이즈가 너무 큽니다.');
+        return;
+      }
+
       const imgFiles = Array.from(files);
       setPhotos(imgFiles);
     }

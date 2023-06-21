@@ -73,10 +73,11 @@ export default function ContentsConfirm() {
     await mutate(form);
 
     if (isSuccess) {
-      console.log('data');
+      handleComplete();
+    } else {
+      alert('쪽지 작성하기를 실패했습니다.');
+      console.log(error);
     }
-
-    console.log(error);
   };
 
   const handleComplete = () => {
