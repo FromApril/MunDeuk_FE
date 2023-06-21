@@ -17,22 +17,24 @@ export default function useKakaoMap() {
   const createMap = (
     mapId: string,
     location: Location,
+    level?: number,
     options?: MapOption,
   ) => {
     return new Promise((resolve, reject) => {
       window.kakao.maps.load(() => {
         const container = document.getElementById(mapId);
-        const defaultOptions = {
-          center: new window.kakao.maps.LatLng(
-            location.latitude,
-            location.longitude,
-          ),
-          level: 3,
+        const center = new window.kakao.maps.LatLng(
+          location.latitude,
+          location.longitude,
+        );
+
+        const mapOptions = {
+          center,
+          level: level || 3,
+          ...options,
         };
 
-        resolve(
-          new window.kakao.maps.Map(container, options || defaultOptions),
-        );
+        resolve(new window.kakao.maps.Map(container, mapOptions));
       });
     });
   };

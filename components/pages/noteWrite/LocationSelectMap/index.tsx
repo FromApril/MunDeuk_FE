@@ -17,9 +17,14 @@ export default function LocationSelectMap() {
   useEffect(() => {
     if (isLoading) return;
 
-    createMap('map', location).then((res) => {
+    createMap('map', location, 1).then((res: any) => {
       const map = res;
       const marker = createMarker(location);
+
+      map.setMinLevel(1);
+      map.setMaxLevel(1);
+      marker.setMap(map);
+      marker.setDraggable(true);
 
       window.kakao.maps.event.addListener(marker, 'dragend', function () {
         const location = marker.getPosition();
@@ -31,9 +36,6 @@ export default function LocationSelectMap() {
           longitude: location.Ma,
         });
       });
-
-      marker.setMap(map);
-      marker.setDraggable(true);
     });
   }, [location]);
 

@@ -7,13 +7,12 @@ export const getNotes = (location: Location): ApiResponse<Note[]> => {
   return client.get('/note', { params: location });
 };
 
-export const postNote = (payload: {
-  content: string;
-  latitude: number;
-  longitude: number;
-  writerId: number;
-}): ApiResponse<null> => {
-  return client.post('/note', payload);
+export const postNote = (payload: FormData): ApiResponse<null> => {
+  return client.post('/note', payload, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 };
 
 export const putNote = () => {
