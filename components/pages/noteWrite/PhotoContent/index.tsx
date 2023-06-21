@@ -19,28 +19,34 @@ export default function PhotoContent() {
         return;
       }
 
+      // 파일사이즈 최대 2MB 체크
+      const MAX_SIZE = 2 * Math.pow(2, 20);
+      const filesSize = Array.from(files).reduce(
+        (acc, file) => acc + file.size,
+        0,
+      );
+
+      console.log('파일 사이즈');
+      console.log(filesSize);
+
+      if (filesSize > MAX_SIZE) {
+        alert('이미지 사이즈가 너무 큽니다.');
+        return;
+      }
+
       const imgFiles = Array.from(files);
-      imgFiles.map((file) => encodeFileToBase64(file));
+      setPhotos(imgFiles);
     }
   };
 
   const handleDelete = (idx: number) => {
     const newPhotos = [...photos.slice(0, idx), ...photos.slice(idx + 1)];
+
     setPhotos(newPhotos);
   };
 
-  const encodeFileToBase64 = (blob: Blob) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(blob);
-
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        const result = reader.result as string;
-
-        setPhotos((prev) => [...prev, result]);
-        resolve(true);
-      };
-    });
+  const handleLoadImg = (url: string) => {
+    URL.revokeObjectURL(url);
   };
 
   if (!photos.length) {
@@ -69,17 +75,21 @@ export default function PhotoContent() {
 
   return (
     <PhotoContentContainer>
-      {photos.map((photo, idx) => (
-        <PhotoImage key={'photo-' + idx}>
-          <img src={photo} alt="img" />
-          <Icon
-            name="Close"
-            width={18}
-            height={18}
-            onClick={() => handleDelete(idx)}
-          />
-        </PhotoImage>
-      ))}
+      {photos.map((photo, idx) => {
+        const url = URL.createObjectURL(photo);
+
+        return (
+          <PhotoImage key={'photo-' + idx}>
+            <img src={url} alt="img" onLoad={() => handleLoadImg(url)} />
+            <Icon
+              name="Close"
+              width={18}
+              height={18}
+              onClick={() => handleDelete(idx)}
+            />
+          </PhotoImage>
+        );
+      })}
     </PhotoContentContainer>
   );
 }

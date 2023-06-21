@@ -13,10 +13,12 @@ export default function HomePage() {
   useEffect(() => {
     if (isLoading) return;
 
-    createMap('map', location).then((res) => {
+    createMap('map', location, 1).then((res: any) => {
       const map = res;
       const marker = createMarker(location);
 
+      map.setMinLevel(1);
+      map.setMaxLevel(12);
       marker.setMap(map);
     });
   }, [location]);

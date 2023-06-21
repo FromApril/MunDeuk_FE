@@ -15,12 +15,7 @@ export default function NoteWriteComplete() {
     <PageContainer>
       <Description>성공적으로 쪽지를 작성했습니다.</Description>
       <CompleteImage>
-        <Image
-          src="/images/note_write_complete.png"
-          alt="complete"
-          width={375}
-          height={400}
-        />
+        <Image src="/images/note_write_complete.png" alt="complete" fill />
       </CompleteImage>
       <BottomLayout>
         <Button variant="primary" onClick={goHomePage}>
@@ -40,4 +35,10 @@ const Description = styled.div`
 
 const CompleteImage = styled.div`
   margin-top: 40px;
+
+  & > img {
+    position: relative !important;
+    width: 100% !important;
+    object-fit: contain;
+  }
 `;
