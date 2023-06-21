@@ -6,6 +6,14 @@ export type Location = {
 };
 
 export type ApiResponse<T> = Promise<{
-  status: number;
+  success: boolean;
   data: T;
+  msg: string | null;
+}>;
+
+export type ApiError = Promise<{
+  message: string;
+  name: string;
+  stack: string;
+  status: number;
 }>;
