@@ -20,9 +20,9 @@ export const textAtom = atom({
   default: '',
 });
 
-export const photosAtom = atom({
+export const photosAtom = atom<File[]>({
   key: '/noteWrite/photosAtom',
-  default: [] as string[],
+  default: [],
 });
 
 export const musicAtom = atom({

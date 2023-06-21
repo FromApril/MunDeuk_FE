@@ -1,11 +1,14 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 
+import { postNote } from '@/apis/note';
 import EmotionIcon from '@/components/common/EmotionIcon';
 import Icon from '@/components/common/Icon';
+import ApiErrorBoundary from '@/components/layouts/ApiErrorBoundary';
 import Navigation from '@/components/layouts/Navigation';
 import PageContainer from '@/components/layouts/PageContainer';
 import EmotionSelectModal from '@/components/pages/noteWrite/EmotionSelectModal';
@@ -21,6 +24,9 @@ import { layouts } from '@/styles/layouts';
 
 export default function ContentsConfirm() {
   const router = useRouter();
+  const { mutate, error, isSuccess } = useMutation(postNote);
+
+  const text = useRecoilValue(textAtom);
   const location = useRecoilValue(locationAtom);
   const photos = useRecoilValue(photosAtom);
   const music = useRecoilValue(musicAtom);
@@ -33,7 +39,7 @@ export default function ContentsConfirm() {
 
   console.log(location, photos, emotion, music);
 
-  const handleResetStates = () => {
+  const resetStates = () => {
     resetLocation();
     resetText();
     resetPhotos();
@@ -41,8 +47,40 @@ export default function ContentsConfirm() {
     resetEmotion();
   };
 
+  const getFormData = () => {
+    const form = new FormData();
+
+    form.append(
+      'content',
+      JSON.stringify({
+        text,
+      }),
+    );
+    form.append('latitude', String(location.latitude));
+    form.append('longitude', String(location.longitude));
+    form.append('writerId', String(3));
+
+    for (const photo of photos) {
+      form.append('newImages', photo, photo.name);
+    }
+
+    return form;
+  };
+
+  const submitForm = async () => {
+    const form = getFormData();
+
+    await mutate(form);
+
+    if (isSuccess) {
+      console.log('data');
+    }
+
+    console.log(error);
+  };
+
   const handleComplete = () => {
-    handleResetStates();
+    resetStates();
 
     router.push('/noteWrite?page=5');
   };
@@ -50,35 +88,37 @@ export default function ContentsConfirm() {
   const today = `${dayjs().get('M') + 1}월 ${dayjs().get('D')}일`;
 
   return (
-    <PageContainer css={containerCss}>
-      <Navigation isBack title="쪽지 작성" />
-      <SelectedEmotion>
-        <EmotionIcon name={emotion} width={300} height={300} fill="#FF7AC5" />
-        <SavedContents>
-          <div>{today}</div>
-          <div>
-            <ContentIcon>
-              <Icon name="Text" width={24} height={24} />
-            </ContentIcon>
-            {photos.length > 0 && (
+    <ApiErrorBoundary>
+      <PageContainer css={containerCss}>
+        <Navigation isBack title="쪽지 작성" />
+        <SelectedEmotion>
+          <EmotionIcon name={emotion} width={300} height={300} fill="#FF7AC5" />
+          <SavedContents>
+            <div>{today}</div>
+            <div>
               <ContentIcon>
-                <Icon name="Camera" width={24} height={24} />
+                <Icon name="Text" width={24} height={24} />
               </ContentIcon>
-            )}
-            {music.title && (
-              <ContentIcon>
-                <Icon name="Music" width={24} height={24} />
-              </ContentIcon>
-            )}
-          </div>
-        </SavedContents>
-      </SelectedEmotion>
-      <EmotionSelectModal
-        emotion={emotion}
-        onClick={() => null}
-        onComplete={handleComplete}
-      />
-    </PageContainer>
+              {photos.length > 0 && (
+                <ContentIcon>
+                  <Icon name="Camera" width={24} height={24} />
+                </ContentIcon>
+              )}
+              {music.title && (
+                <ContentIcon>
+                  <Icon name="Music" width={24} height={24} />
+                </ContentIcon>
+              )}
+            </div>
+          </SavedContents>
+        </SelectedEmotion>
+        <EmotionSelectModal
+          emotion={emotion}
+          onClick={() => null}
+          onComplete={submitForm}
+        />
+      </PageContainer>
+    </ApiErrorBoundary>
   );
 }
 

@@ -20,27 +20,18 @@ export default function PhotoContent() {
       }
 
       const imgFiles = Array.from(files);
-      imgFiles.map((file) => encodeFileToBase64(file));
+      setPhotos(imgFiles);
     }
   };
 
   const handleDelete = (idx: number) => {
     const newPhotos = [...photos.slice(0, idx), ...photos.slice(idx + 1)];
+
     setPhotos(newPhotos);
   };
 
-  const encodeFileToBase64 = (blob: Blob) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(blob);
-
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        const result = reader.result as string;
-
-        setPhotos((prev) => [...prev, result]);
-        resolve(true);
-      };
-    });
+  const handleLoadImg = (url: string) => {
+    URL.revokeObjectURL(url);
   };
 
   if (!photos.length) {
@@ -69,17 +60,21 @@ export default function PhotoContent() {
 
   return (
     <PhotoContentContainer>
-      {photos.map((photo, idx) => (
-        <PhotoImage key={'photo-' + idx}>
-          <img src={photo} alt="img" />
-          <Icon
-            name="Close"
-            width={18}
-            height={18}
-            onClick={() => handleDelete(idx)}
-          />
-        </PhotoImage>
-      ))}
+      {photos.map((photo, idx) => {
+        const url = URL.createObjectURL(photo);
+
+        return (
+          <PhotoImage key={'photo-' + idx}>
+            <img src={url} alt="img" onLoad={() => handleLoadImg(url)} />
+            <Icon
+              name="Close"
+              width={18}
+              height={18}
+              onClick={() => handleDelete(idx)}
+            />
+          </PhotoImage>
+        );
+      })}
     </PhotoContentContainer>
   );
 }
