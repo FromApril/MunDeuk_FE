@@ -15,6 +15,14 @@ export const postNote = (payload: FormData): ApiResponse<null> => {
   });
 };
 
+export const postNoteWithImage = (payload: FormData): ApiResponse<null> => {
+  return client.post('/note/withImage', payload, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};
+
 export const putNote = () => {
   // return client.
 };

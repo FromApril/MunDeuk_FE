@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 
-import { postNote } from '@/apis/note';
+import { postNoteWithImage } from '@/apis/note';
 import EmotionIcon from '@/components/common/EmotionIcon';
 import Icon from '@/components/common/Icon';
 import ApiErrorBoundary from '@/components/layouts/ApiErrorBoundary';
@@ -24,7 +24,7 @@ import { layouts } from '@/styles/layouts';
 
 export default function ContentsConfirm() {
   const router = useRouter();
-  const { mutate } = useMutation(postNote);
+  const { mutate } = useMutation(postNoteWithImage);
 
   const text = useRecoilValue(textAtom);
   const location = useRecoilValue(locationAtom);
@@ -61,7 +61,7 @@ export default function ContentsConfirm() {
     form.append('writerId', String(3));
 
     for (const photo of photos) {
-      form.append('newImages', photo, photo.name);
+      form.append('files', photo, photo.name);
     }
 
     return form;
