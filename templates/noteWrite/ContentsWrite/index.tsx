@@ -26,10 +26,10 @@ export default function ContentsWrite() {
           <Description>오늘의 사진</Description>
           <PhotoContent />
         </PhotoSection>
-        <MusicSection>
+        {/* <MusicSection>
           <Description>오늘의 노래</Description>
           <MusicContent />
-        </MusicSection>
+        </MusicSection> */}
       </ContentBody>
       <BottomButton />
     </PageContainer>
