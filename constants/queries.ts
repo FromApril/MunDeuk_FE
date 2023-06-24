@@ -1,5 +1,3 @@
 export const QUERIES = {
-  GET_NOTES: 'GET_NOTES',
-  POST_NOTE: 'POST_NOTE',
-  DELELE_NOTE: 'DELELE_NOTE',
+  NOTES: 'NOTES',
 };
