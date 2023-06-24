@@ -22,12 +22,7 @@ client.interceptors.request.use(
 );
 
 client.interceptors.response.use(
-  (response): Promise<any> => {
-    return Promise.resolve({
-      status: response.status,
-      data: response.data,
-    });
-  },
+  (response): Promise<any> => response.data,
   (error) => {
     if (error.response) {
       throw new ApiError(error);
