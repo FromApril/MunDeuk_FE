@@ -2,10 +2,7 @@ import axios from 'axios';
 
 import { ApiError } from './error';
 
-const BASE_URL =
-  process.env.NODE_ENV === 'development'
-    ? '/api'
-    : process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const client = axios.create({
   baseURL: BASE_URL,
