@@ -2,8 +2,8 @@ import * as Icons from '@/public/emotionIcons';
 
 type EmotionIconProps = {
   name: keyof typeof Icons;
-  width: number;
-  height: number;
+  width: number | string;
+  height: number | string;
   stroke?: string;
   fill?: string | 'none';
   onClick?: () => void;

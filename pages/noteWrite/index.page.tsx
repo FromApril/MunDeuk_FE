@@ -12,12 +12,12 @@ export default function NoteWritePage() {
   const page = Number(router.query.page || 1);
 
   return (
-    <main>
+    <>
       {page === 1 && <LocationSelect />}
       {page === 2 && <EmotionSelect />}
       {page === 3 && <ContentsWrite />}
       {page === 4 && <ContentsConfirm />}
       {page === 5 && <NoteWriteComplete />}
-    </main>
+    </>
   );
 }
