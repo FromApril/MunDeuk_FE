@@ -7,6 +7,12 @@ export const positionAbsoluteXYCenter = css`
   transform: translate(-50%, -50%);
 `;
 
+export const positionAbsoluteBottom = css`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+`;
+
 export const positionFixedBottom = css`
   position: fixed;
   left: 0;
