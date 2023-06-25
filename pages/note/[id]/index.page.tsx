@@ -15,7 +15,9 @@ export default function NoteDetailPage() {
   const goHomePage = () => router.push('/home');
 
   // TODO: 쪽지 저장하기 함수
-  const subscribeNote = () => {};
+  const subscribeNote = () => {
+    // logics
+  };
 
   return (
     <PageContainer css={containerCss}>
