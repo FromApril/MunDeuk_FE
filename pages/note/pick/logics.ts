@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-export default function useNotePick() {
+export default function useNotePickPage() {
   const router = useRouter();
   const noteId = router.query.id;
 

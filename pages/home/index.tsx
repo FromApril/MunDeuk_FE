@@ -3,10 +3,10 @@ import styled from '@emotion/styled';
 import MapLoading from '@/components/common/MapLoading';
 import { layouts } from '@/styles/layouts';
 
-import useHome from './logics';
+import useHomePage from './logics';
 
 export default function HomePage() {
-  const { isLoading, isError } = useHome();
+  const { isLoading, isError } = useHomePage();
 
   if (isLoading || isError) {
     return <MapLoading />;

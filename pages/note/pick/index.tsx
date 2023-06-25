@@ -8,10 +8,10 @@ import PageContainer from '@/components/layouts/PageContainer';
 import { positionAbsoluteXYCenter } from '@/styles/common';
 import { layouts } from '@/styles/layouts';
 
-import useNotePick from './logics';
+import useNotePickPage from './logics';
 
 export default function NotePickPage() {
-  const { goHomePage, goNoteDetailPage } = useNotePick();
+  const { goHomePage, goNoteDetailPage } = useNotePickPage();
 
   return (
     <PageContainer>

@@ -4,7 +4,7 @@ import useNotes from '@/hooks/queries/useNotes';
 import useKakaoMap from '@/hooks/useKakaoMap';
 import useLocation from '@/hooks/useLocation';
 
-export default function useHome() {
+export default function useHomePage() {
   const mapRef = useRef<any>();
   const { createMap, createMarker } = useKakaoMap();
   const { isLoading, isError, location } = useLocation();
