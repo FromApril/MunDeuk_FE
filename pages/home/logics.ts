@@ -1,63 +1,86 @@
+import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 
 import useNotes from '@/hooks/queries/useNotes';
 import useKakaoMap from '@/hooks/useKakaoMap';
 import useLocation from '@/hooks/useLocation';
+import { Note } from '@/interfaces/note';
 
 export default function useHomePage() {
-  const mapRef = useRef<any>();
-  const { createMap, createMarker } = useKakaoMap();
+  const router = useRouter();
+  const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<any>();
   const { isLoading, isError, location } = useLocation();
+  const { createMap, createMarker } = useKakaoMap();
   const { data: notes } = useNotes();
+
+  const isHasMapImage = mapRef.current?.childElementCount;
+
+  const goNotePickPage = (id: number) => {
+    router.push(`/note/pick?id=${id}`);
+  };
+
+  const addMarkerClickEvent = (marker: any) => {
+    window.kakao.maps.event.addListener(marker, 'click', function () {
+      const id = marker.getTitle();
+
+      goNotePickPage(id);
+    });
+  };
+
+  const initMap = () => {
+    createMap('map', location, 1).then((res: any) => {
+      const map = res;
+
+      map.setMinLevel(1);
+      map.setMaxLevel(12);
+      mapInstanceRef.current = map;
+    });
+  };
+
+  const initMarkers = (notes: Note[]) => {
+    const map = mapInstanceRef.current;
+
+    notes.forEach((note) => {
+      const { latitude: lat, longitude: long, id } = note;
+
+      // test
+      const { latitude, longitude } = location;
+
+      const marker = createMarker({
+        location: {
+          latitude: latitude + Math.random() * 0.001,
+          longitude: longitude + Math.random() * 0.001,
+        },
+        title: id,
+      });
+
+      addMarkerClickEvent(marker);
+      marker.setMap(map);
+    });
+  };
 
   // 맵 초기화
   useEffect(() => {
     if (isLoading) return;
-    if (mapRef.current) return;
+    if (mapInstanceRef.current) return;
 
-    createMap('map', location, 1).then((res: any) => {
-      const map = res;
-      // const marker = createMarker(location);
-
-      map.setMinLevel(1);
-      map.setMaxLevel(12);
-
-      mapRef.current = map;
-      // marker.setMap(map);
-    });
+    initMap();
   }, [location]);
 
   // 맵 초기화 & 쪽지리스트 API 성공 후, 마커 삽입
   useEffect(() => {
-    if (!mapRef.current) return;
+    if (!mapInstanceRef.current) return;
     if (!notes) return;
 
-    const map = mapRef.current;
-
-    console.log(notes);
-
-    notes.forEach((note, idx) => {
-      const { latitude, longitude, id } = note;
-
-      console.log(`note ${idx}`);
-      console.log(note);
-
-      const marker = createMarker(
-        {
-          latitude: 37.483 + Math.random() * 0.001,
-          longitude: 126.918 + Math.random() * 0.001,
-        },
-        {
-          title: id,
-        },
-      );
-
-      marker.setMap(map);
-    });
-  }, [mapRef.current, notes]);
+    initMarkers(notes);
+  }, [mapInstanceRef.current, notes]);
 
   return {
+    mapRef,
     isLoading,
     isError,
+    isHasMapImage,
+    initMap,
   };
 }

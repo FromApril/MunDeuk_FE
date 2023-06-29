@@ -1,23 +1,36 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useRouter } from 'next/router';
 
 import Button from '@/components/common/Button';
 import EmotionIcon from '@/components/common/EmotionIcon';
 import PageContainer from '@/components/layouts/PageContainer';
-import { positionAbsoluteBottom } from '@/styles/common';
+
+import useNoteDetailPage from './logics';
 
 const IMG_URL = '/sample/hangang.webp';
 
 export default function NoteDetailPage() {
-  const router = useRouter();
+  const { note, goHomePage, subscribeNote } = useNoteDetailPage();
 
-  const goHomePage = () => router.push('/home');
+  if (!note) {
+    return (
+      <PageContainer>
+        <NoNoteMessage>쪽지 정보가 없습니다.</NoNoteMessage>
+        <ContentBottom>
+          <NoteStay>
+            <NoteStayMessage onClick={goHomePage}>
+              홈으로 이동하기
+            </NoteStayMessage>
+          </NoteStay>
+        </ContentBottom>
+      </PageContainer>
+    );
+  }
 
-  // TODO: 쪽지 저장하기 함수
-  const subscribeNote = () => {
-    // logics
-  };
+  const { id, content, imageUrls } = note;
+
+  const text = content.text || 'NULL';
+  const count = imageUrls.length;
 
   return (
     <PageContainer css={containerCss}>
@@ -26,20 +39,23 @@ export default function NoteDetailPage() {
           <EmotionIcon name="Glad" width={55} height={55} fill="#6bafff" />
         </div>
         <div>
-          <p>{'선우'}님의 쪽지</p>
-          <p>콘텐츠 {4}개</p>
+          <p>{id}님의 쪽지</p>
+          <p>콘텐츠 {count}개</p>
         </div>
       </UserInfo>
       <UserContent>
+        <TextSection>
+          <ContentDescription>오늘의 글</ContentDescription>
+          <Text>{text}</Text>
+        </TextSection>
         <ImagesSection>
           <ContentDescription>오늘의 사진</ContentDescription>
           <Images>
-            <Image>
-              <img src={IMG_URL} alt="img" />
-            </Image>
-            <Image>
-              <img src={IMG_URL} alt="img" />
-            </Image>
+            {imageUrls.map((url) => (
+              <Image key={url}>
+                <img src={url} alt="img" />
+              </Image>
+            ))}
           </Images>
         </ImagesSection>
         <MusicSection>
@@ -105,7 +121,13 @@ const ContentDescription = styled.h3`
   font-size: 13px;
 `;
 
-const ImagesSection = styled.section``;
+const TextSection = styled.section``;
+
+const Text = styled.div``;
+
+const ImagesSection = styled.section`
+  margin-top: 40px;
+`;
 
 const Images = styled.div`
   margin-top: 8px;
@@ -181,4 +203,11 @@ const NoteStayMessage = styled.p`
   color: #777;
   text-decoration: underline;
   cursor: pointer;
+`;
+
+const NoNoteMessage = styled.div`
+  padding-top: 30px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
 `;
