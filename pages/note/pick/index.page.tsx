@@ -11,7 +11,7 @@ import { layouts } from '@/styles/layouts';
 import useNotePickPage from './logics';
 
 export default function NotePickPage() {
-  const { goHomePage, goNoteDetailPage } = useNotePickPage();
+  const { note, goHomePage, goNoteDetailPage } = useNotePickPage();
 
   return (
     <PageContainer>
@@ -22,7 +22,7 @@ export default function NotePickPage() {
       </NotePickMessage>
       <SelectedEmotion>
         <EmotionIcon
-          name="Depressed"
+          name={'Depressed'}
           width={'35vh'}
           height={'35vh'}
           fill="#6bafff"
