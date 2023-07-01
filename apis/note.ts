@@ -33,3 +33,10 @@ export const deleteNote = (payload: {
 }): ApiResponse<null> => {
   return client.delete('/note', { params: payload });
 };
+
+export const subscribeNote = (payload: {
+  viewerId: number;
+  noteId: number;
+}): ApiResponse<null> => {
+  return client.patch('/note/subscribe', payload);
+};

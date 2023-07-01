@@ -9,7 +9,7 @@ import UserInfo from '@/components/pages/noteDetail/UserInfo';
 import useNoteDetailPage from './logics';
 
 export default function NoteDetailPage() {
-  const { note, goHomePage, subscribeNote } = useNoteDetailPage();
+  const { note, goHomePage, saveNote } = useNoteDetailPage();
 
   if (!note) {
     return <NoNote onClick={goHomePage} />;
@@ -21,7 +21,7 @@ export default function NoteDetailPage() {
     <PageContainer css={containerCss}>
       <UserInfo note={note} />
       <UserContent note={note} />
-      <UserContentBottom onMessage={goHomePage} onSave={subscribeNote} />
+      <UserContentBottom onMessage={goHomePage} onSave={saveNote} />
     </PageContainer>
   );
 }
