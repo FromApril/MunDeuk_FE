@@ -1,7 +1,7 @@
 import { ApiResponse, Location } from '@/interfaces/common';
 import { Note } from '@/interfaces/note';
 
-import client from './client';
+import client from './common/client';
 
 export const getNotes = (location: Location): ApiResponse<Note[]> => {
   return client.get('/note', { params: location });

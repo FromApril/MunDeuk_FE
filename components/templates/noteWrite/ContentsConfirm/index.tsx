@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import EmotionIcon from '@/components/common/EmotionIcon';
-import ApiErrorBoundary from '@/components/layouts/ApiErrorBoundary';
 import Navigation from '@/components/layouts/Navigation';
 import PageContainer from '@/components/layouts/PageContainer';
 import EmotionSelectModal from '@/components/pages/noteWrite/EmotionSelectModal';
@@ -16,24 +15,22 @@ export default function ContentsConfirm() {
   const { emotion, today, photos, music, submitForm } = useContentsConfirm();
 
   return (
-    <ApiErrorBoundary>
-      <PageContainer css={containerCss}>
-        <Navigation isBack title="쪽지 작성" />
-        <SelectedEmotion>
-          <EmotionIcon name={emotion} width={300} height={300} fill="#FF7AC5" />
-          <SavedContents
-            today={today}
-            isHavePhotos={photos.length > 0}
-            isHaveMusic={music.title.length > 0}
-          />
-        </SelectedEmotion>
-        <EmotionSelectModal
-          emotion={emotion}
-          onClick={() => null}
-          onComplete={submitForm}
+    <PageContainer css={containerCss}>
+      <Navigation isBack title="쪽지 작성" />
+      <SelectedEmotion>
+        <EmotionIcon name={emotion} width={300} height={300} fill="#FF7AC5" />
+        <SavedContents
+          today={today}
+          isHavePhotos={photos.length > 0}
+          isHaveMusic={music.title.length > 0}
         />
-      </PageContainer>
-    </ApiErrorBoundary>
+      </SelectedEmotion>
+      <EmotionSelectModal
+        emotion={emotion}
+        onClick={() => null}
+        onComplete={submitForm}
+      />
+    </PageContainer>
   );
 }
 
