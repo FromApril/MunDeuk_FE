@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 
-import ContentsConfirm from '@/templates/noteWrite/ContentsConfirm';
-import ContentsWrite from '@/templates/noteWrite/ContentsWrite';
-import EmotionSelect from '@/templates/noteWrite/EmotionSelect';
-import LocationSelect from '@/templates/noteWrite/LocationSelect';
-import NoteWriteComplete from '@/templates/noteWrite/NoteWriteComplete';
+import ContentsConfirm from '@/components/templates/noteWrite/ContentsConfirm';
+import ContentsWrite from '@/components/templates/noteWrite/ContentsWrite';
+import EmotionSelect from '@/components/templates/noteWrite/EmotionSelect';
+import LocationSelect from '@/components/templates/noteWrite/LocationSelect';
+import NoteWriteComplete from '@/components/templates/noteWrite/NoteWriteComplete';
 
 export default function NoteWritePage() {
   const router = useRouter();

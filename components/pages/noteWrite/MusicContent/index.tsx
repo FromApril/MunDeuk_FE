@@ -1,15 +1,12 @@
 import styled from '@emotion/styled';
-import React from 'react';
-import { useRecoilState, useResetRecoilState } from 'recoil';
 
 import Button from '@/components/common/Button';
 import Icon from '@/components/common/Icon';
-import { musicAtom } from '@/recoil/noteWrite/atoms';
+import useNoteWriteContents from '@/hooks/useNoteWriteContents';
 import { flexXYCenter } from '@/styles/common';
 
 export default function MusicContent() {
-  const [music, setMusic] = useRecoilState(musicAtom);
-  const resetRecoilState = useResetRecoilState(musicAtom);
+  const { music, setMusic, resetMusic } = useNoteWriteContents();
 
   const setTmpMusic = () => {
     setMusic({
@@ -42,7 +39,7 @@ export default function MusicContent() {
         <p>{artist}</p>
       </div>
       <div>
-        <Icon name="Close" width={18} height={18} onClick={resetRecoilState} />
+        <Icon name="Close" width={18} height={18} onClick={resetMusic} />
       </div>
     </SelectedMusic>
   );
