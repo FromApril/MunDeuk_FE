@@ -46,6 +46,7 @@ export default function useHomePage() {
 
   const getMarker = (note: Note, idx: number, location: Location) => {
     const { id } = note;
+    // const { latitude, longitude, id } = note;
     const { latitude, longitude } = location;
 
     const imageType =
@@ -71,6 +72,8 @@ export default function useHomePage() {
 
     const marker = createMarker({
       location: {
+        // latitude,
+        // longitude,
         latitude: latitude + Math.random() * 0.001,
         longitude: longitude + Math.random() * 0.001,
       },
