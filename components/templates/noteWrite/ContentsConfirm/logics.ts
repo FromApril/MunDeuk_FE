@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 
 import { postNoteWithImage } from '@/apis/note';
+import useLoading from '@/hooks/useLoading';
 import useNoteWriteContents from '@/hooks/useNoteWriteContents';
 
 export default function useContentsConfirm() {
@@ -10,8 +11,7 @@ export default function useContentsConfirm() {
   const { mutate } = useMutation(postNoteWithImage);
   const { location, text, photos, music, emotion, resetAllContents } =
     useNoteWriteContents();
-
-  console.log(location, photos, emotion, music);
+  const { showLoading, hideLoading } = useLoading();
 
   const getFormData = () => {
     const form = new FormData();
@@ -35,7 +35,7 @@ export default function useContentsConfirm() {
   };
 
   const submitForm = () => {
-    window.alert('로딩');
+    showLoading();
 
     const form = getFormData();
 
@@ -45,7 +45,10 @@ export default function useContentsConfirm() {
       },
       onError: (error) => {
         alert('쪽지 작성하기를 실패했습니다.');
-        console.log(error);
+        console.error(error);
+      },
+      onSettled: () => {
+        hideLoading();
       },
     });
   };
