@@ -14,6 +14,14 @@ export default function HomePage() {
     return <MapLoading />;
   }
 
+  if (isError) {
+    return (
+      <PageContainer>
+        <ErrorMessage>페이지를 불러오는데 실패했습니다.</ErrorMessage>
+      </PageContainer>
+    );
+  }
+
   return (
     <PageContainer>
       <Map ref={mapRef} id="map" />
@@ -33,4 +41,8 @@ const ReloadButton = styled.button`
   ${positionAbsoluteXYCenter};
   background-color: #ddd;
   padding: 5px;
+`;
+
+const ErrorMessage = styled.div`
+  ${positionAbsoluteXYCenter};
 `;
