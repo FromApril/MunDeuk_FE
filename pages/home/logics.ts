@@ -1,15 +1,18 @@
 import { useRouter } from 'next/router';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import useNotes from '@/hooks/queries/useNotes';
 import useKakaoMap from '@/hooks/useKakaoMap';
 import useLocation from '@/hooks/useLocation';
+import { Location } from '@/interfaces/common';
 import { Note } from '@/interfaces/note';
 
 export default function useHomePage() {
   const router = useRouter();
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>();
+  const [isInitMap, setIsInitMap] = useState(false);
+
   const { isLoading, isError, location } = useLocation();
   const { createMap, createMarker } = useKakaoMap();
   const { data: notes } = useNotes();
@@ -18,14 +21,6 @@ export default function useHomePage() {
 
   const goNotePickPage = (id: number) => {
     router.push(`/note/pick?id=${id}`);
-  };
-
-  const addMarkerClickEvent = (marker: any) => {
-    window.kakao.maps.event.addListener(marker, 'click', function () {
-      const id = marker.getTitle();
-
-      goNotePickPage(id);
-    });
   };
 
   const initMap = () => {
@@ -39,24 +34,63 @@ export default function useHomePage() {
   };
 
   const initMarkers = (notes: Note[]) => {
+    console.log('initMarkers');
+
     const map = mapInstanceRef.current;
 
-    notes.forEach((note) => {
-      const { latitude: lat, longitude: long, id } = note;
-
-      // test
-      const { latitude, longitude } = location;
-
-      const marker = createMarker({
-        location: {
-          latitude: latitude + Math.random() * 0.001,
-          longitude: longitude + Math.random() * 0.001,
-        },
-        title: id,
-      });
-
-      addMarkerClickEvent(marker);
+    notes.forEach((note, idx) => {
+      const marker = getMarker(note, idx, location);
       marker.setMap(map);
+    });
+  };
+
+  const getMarker = (note: Note, idx: number, location: Location) => {
+    const { id } = note;
+    // const { latitude, longitude, id } = note;
+    const { latitude, longitude } = location;
+
+    const imageType =
+      idx % 4 === 0
+        ? 'depressed.svg'
+        : idx % 4 === 1
+        ? 'flutter.svg'
+        : idx % 4 === 2
+        ? 'glad.svg'
+        : idx % 4 === 3
+        ? 'touched.svg'
+        : '';
+
+    const imageSrc = window.location.origin + '/images/' + imageType;
+    const imageSize = new window.kakao.maps.Size(30, 30);
+    const imageOption = { offset: new window.kakao.maps.Point(30, 30) };
+
+    const markerImage = new window.kakao.maps.MarkerImage(
+      imageSrc,
+      imageSize,
+      imageOption,
+    );
+
+    const marker = createMarker({
+      location: {
+        // latitude,
+        // longitude,
+        latitude: latitude + Math.random() * 0.001,
+        longitude: longitude + Math.random() * 0.001,
+      },
+      title: id,
+      image: markerImage,
+    });
+
+    addMarkerClickEvent(marker);
+
+    return marker;
+  };
+
+  const addMarkerClickEvent = (marker: any) => {
+    window.kakao.maps.event.addListener(marker, 'click', function () {
+      const id = marker.getTitle();
+
+      goNotePickPage(id);
     });
   };
 
@@ -66,15 +100,16 @@ export default function useHomePage() {
     if (mapInstanceRef.current) return;
 
     initMap();
+    setIsInitMap(true);
   }, [location]);
 
   // 맵 초기화 & 쪽지리스트 API 성공 후, 마커 삽입
   useEffect(() => {
-    if (!mapInstanceRef.current) return;
     if (!notes) return;
+    // if (!isInitMap) return;
 
     initMarkers(notes);
-  }, [mapInstanceRef.current, notes]);
+  }, [isInitMap, notes]);
 
   return {
     mapRef,

@@ -1,7 +1,7 @@
 import { ApiResponse, Location } from '@/interfaces/common';
 import { Note } from '@/interfaces/note';
 
-import client from './client';
+import client from './common/client';
 
 export const getNotes = (location: Location): ApiResponse<Note[]> => {
   return client.get('/note', { params: location });
@@ -32,4 +32,11 @@ export const deleteNote = (payload: {
   noteId: number;
 }): ApiResponse<null> => {
   return client.delete('/note', { params: payload });
+};
+
+export const subscribeNote = (payload: {
+  viewerId: number;
+  noteId: number;
+}): ApiResponse<null> => {
+  return client.patch('/note/subscribe', payload);
 };

@@ -1,11 +1,9 @@
 import styled from '@emotion/styled';
-import React from 'react';
-import { useRecoilState } from 'recoil';
 
-import { textAtom } from '@/recoil/noteWrite/atoms';
+import useNoteWriteContents from '@/hooks/useNoteWriteContents';
 
 export default function TextContent() {
-  const [text, setText] = useRecoilState(textAtom);
+  const { text, setText } = useNoteWriteContents();
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setText(e.target.value);

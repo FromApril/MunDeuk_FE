@@ -1,11 +1,19 @@
-export type EmotionType = 'Depressed' | 'Flutter' | 'Glad' | 'Touched';
+export type EmotionType =
+  | 'Depressed'
+  | 'Flutter'
+  | 'Glad'
+  | 'Touched'
+  | 'Default';
 
 export interface Note {
+  content: {
+    text: string;
+    emotion: EmotionType;
+  };
   imageUrls: string[];
   noteState: ['DELETED', 'ACTIVE', 'OUT_DATED'];
   createAt: string;
   updatedAt: string;
-  content: Record<string, any>;
   viewCount: number;
   likeCount: number;
   latitude: number;
