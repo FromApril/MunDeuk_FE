@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import Button from '@/components/common/Button';
+import { layouts } from '@/styles/layouts';
 
 type UserContentBottomProps = {
   onMessage: () => void;
@@ -29,6 +30,7 @@ const ContentBottom = styled.section`
   transform: translateX(-50%);
   bottom: 10px;
   width: calc(100% - 20px);
+  max-width: calc(${layouts.deviceWidth} - 20px);
 `;
 
 const NoteStay = styled.div`
