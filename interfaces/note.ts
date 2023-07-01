@@ -1,4 +1,9 @@
-export type EmotionType = 'Depressed' | 'Flutter' | 'Glad' | 'Touched';
+export type EmotionType =
+  | 'Depressed'
+  | 'Flutter'
+  | 'Glad'
+  | 'Touched'
+  | 'Default';
 
 export interface Note {
   content: {
