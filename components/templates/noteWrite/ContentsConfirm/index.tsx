@@ -1,93 +1,19 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useMutation } from '@tanstack/react-query';
-import dayjs from 'dayjs';
-import { useRouter } from 'next/router';
-import { useRecoilValue, useResetRecoilState } from 'recoil';
 
-import { postNoteWithImage } from '@/apis/note';
 import EmotionIcon from '@/components/common/EmotionIcon';
-import Icon from '@/components/common/Icon';
 import ApiErrorBoundary from '@/components/layouts/ApiErrorBoundary';
 import Navigation from '@/components/layouts/Navigation';
 import PageContainer from '@/components/layouts/PageContainer';
 import EmotionSelectModal from '@/components/pages/noteWrite/EmotionSelectModal';
-import {
-  emotionAtom,
-  locationAtom,
-  musicAtom,
-  photosAtom,
-  textAtom,
-} from '@/recoil/noteWrite/atoms';
 import { positionAbsoluteXYCenter } from '@/styles/common';
 import { layouts } from '@/styles/layouts';
 
+import useContentsConfirm from './logics';
+import SavedContents from './SavedContents';
+
 export default function ContentsConfirm() {
-  const router = useRouter();
-  const { mutate } = useMutation(postNoteWithImage);
-
-  const text = useRecoilValue(textAtom);
-  const location = useRecoilValue(locationAtom);
-  const photos = useRecoilValue(photosAtom);
-  const music = useRecoilValue(musicAtom);
-  const emotion = useRecoilValue(emotionAtom);
-  const resetLocation = useResetRecoilState(locationAtom);
-  const resetText = useResetRecoilState(textAtom);
-  const resetPhotos = useResetRecoilState(photosAtom);
-  const resetMusic = useResetRecoilState(musicAtom);
-  const resetEmotion = useResetRecoilState(emotionAtom);
-
-  console.log(location, photos, emotion, music);
-
-  const resetStates = () => {
-    resetLocation();
-    resetText();
-    resetPhotos();
-    resetMusic();
-    resetEmotion();
-  };
-
-  const getFormData = () => {
-    const form = new FormData();
-
-    form.append(
-      'content',
-      JSON.stringify({
-        text,
-      }),
-    );
-    form.append('latitude', String(location.latitude));
-    form.append('longitude', String(location.longitude));
-    form.append('writerId', String(3));
-
-    for (const photo of photos) {
-      form.append('files', photo, photo.name);
-    }
-
-    return form;
-  };
-
-  const submitForm = () => {
-    const form = getFormData();
-
-    mutate(form, {
-      onSuccess: () => {
-        handleComplete();
-      },
-      onError: (error) => {
-        alert('쪽지 작성하기를 실패했습니다.');
-        console.log(error);
-      },
-    });
-  };
-
-  const handleComplete = () => {
-    resetStates();
-
-    router.push('/noteWrite?page=5');
-  };
-
-  const today = `${dayjs().get('M') + 1}월 ${dayjs().get('D')}일`;
+  const { emotion, today, photos, music, submitForm } = useContentsConfirm();
 
   return (
     <ApiErrorBoundary>
@@ -95,24 +21,11 @@ export default function ContentsConfirm() {
         <Navigation isBack title="쪽지 작성" />
         <SelectedEmotion>
           <EmotionIcon name={emotion} width={300} height={300} fill="#FF7AC5" />
-          <SavedContents>
-            <div>{today}</div>
-            <div>
-              <ContentIcon>
-                <Icon name="Text" width={24} height={24} />
-              </ContentIcon>
-              {photos.length > 0 && (
-                <ContentIcon>
-                  <Icon name="Camera" width={24} height={24} />
-                </ContentIcon>
-              )}
-              {music.title && (
-                <ContentIcon>
-                  <Icon name="Music" width={24} height={24} />
-                </ContentIcon>
-              )}
-            </div>
-          </SavedContents>
+          <SavedContents
+            today={today}
+            isHavePhotos={photos.length > 0}
+            isHaveMusic={music.title.length > 0}
+          />
         </SelectedEmotion>
         <EmotionSelectModal
           emotion={emotion}
@@ -141,34 +54,6 @@ const containerCss = css`
 const SelectedEmotion = styled.div`
   position: relative;
   height: calc(100vh - ${layouts.navigation} - 196px);
-
-  & > svg {
-    ${positionAbsoluteXYCenter};
-  }
-`;
-
-const SavedContents = styled.div`
-  ${positionAbsoluteXYCenter};
-  text-align: center;
-
-  & > div:nth-of-type(1) {
-    font-size: 20px;
-    font-weight: 600;
-  }
-
-  & > div:nth-of-type(2) {
-    margin-top: 10px;
-    display: inline-flex;
-    gap: 0 12px;
-  }
-`;
-
-const ContentIcon = styled.div`
-  position: relative;
-  background-color: #fff;
-  border-radius: 50%;
-  width: 52px;
-  height: 52px;
 
   & > svg {
     ${positionAbsoluteXYCenter};
