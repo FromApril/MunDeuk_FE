@@ -13,6 +13,8 @@ import useNotePickPage from './logics';
 export default function NotePickPage() {
   const { note, goHomePage, goNoteDetailPage } = useNotePickPage();
 
+  const emotion = note?.content.emotion;
+
   return (
     <PageContainer>
       <Navigation isBack />
@@ -20,14 +22,16 @@ export default function NotePickPage() {
         <p>쪽지를 발견했어요!</p>
         <p>쪽지를 함께 열어볼까요?</p>
       </NotePickMessage>
-      <SelectedEmotion>
-        <EmotionIcon
-          name={'Depressed'}
-          width={'35vh'}
-          height={'35vh'}
-          fill="#6bafff"
-        />
-      </SelectedEmotion>
+      {emotion && (
+        <SelectedEmotion>
+          <EmotionIcon
+            name={emotion}
+            width={'35vh'}
+            height={'35vh'}
+            fill="#6bafff"
+          />
+        </SelectedEmotion>
+      )}
       <BottomLayout>
         <NoteStay>
           <NoteStayMessage onClick={goHomePage}>
