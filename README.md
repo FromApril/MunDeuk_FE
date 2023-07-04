@@ -1,38 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 문득 (MunDeuk)
 
-## Getting Started
 
-First, run the development server:
+## 문득이란?
+어떤 장소에 가면 '문득' 떠오르는 생각이 있지 않나요? <br />
+떠오르는 생각, 감정, 아이디어들을 자신의 장소에 남겨보세요! <br />
+자신의 생각뿐만 아니라 다른 사람들의 생각도 쪽지로 확인해보실 수 있어요 😄
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+
+## Production (alpha version)
+'문득'은 웹뷰로 구현되어 있습니다.
+추후, Flutter를 사용하여 안드로이드(AOS) 앱과 아이폰 앱으로 배포할 예정입니다.
+
+브라우저 환경에서는 아래 사이트에서 확인해보실 수 있습니다. 
+
+https://mundeuk.vercel.app/
+
+
+
+## Frontend Tech Stack
+![Next.js](https://img.shields.io/badge/-Nextjs-000000?style=flat-square&logo=next.js)
+![TypeScript](https://img.shields.io/badge/-TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/-React-222222?style=flat-square&logo=react)
+![React-Query](https://img.shields.io/badge/-React_Query-142111?style=flat-square&logo=react-query)
+![Emotion.js](https://img.shields.io/badge/-Emotion.js-f8c7da?style=flat-square&logo=emotion.js)
+![Redux](https://img.shields.io/badge/-Recoil-000000?style=flat-square&logo=recoil)
+![Github Action](https://img.shields.io/badge/-Github_Action-db0000?style=flat-square&logo=github)
+![Jest](https://img.shields.io/badge/-Jest-65d786?style=flat-square&logo=jest)
+![Cypress](https://img.shields.io/badge/-Cypress-007acc?logo=cypress)
+![Storybook](https://img.shields.io/badge/-Storybook-f8c7da?style=Storybook&logo=storybook)
+
+
+## 프로젝트 구조
+
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+📦 src
+ ┣ 📂 apis           Axios 클라이언트와 API
+ ┣ 📂 components     컴포넌트
+ ┃ ┣ 📂 common       공통 컴포넌트
+ ┃ ┣ 📂 layouts      레이아웃 컴포넌트
+ ┃ ┣ 📂 pages        화면별 컴포넌트
+ ┣ 📂 constants      상수 파일정리
+ ┣ 📂 hooks          공통 hooks
+ ┣ 📂 interfaces     인터페이스
+ ┣ 📂 pages          페이지 폴더
+ ┣ 📂 queries        React-Query hook을 정리
+ ┣ 📂 recoil         Recoil state
+ ┣ 📂 styles         스타일 관련
+ ┣ 📂 utils          유틸함수
+```
