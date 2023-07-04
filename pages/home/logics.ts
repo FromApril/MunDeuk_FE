@@ -9,6 +9,7 @@ import { Note } from '@/interfaces/note';
 export default function useHomePage() {
   const router = useRouter();
   const mapRef = useRef<any>();
+  const clustererRef = useRef<any>();
   const [isInitMap, setIsInitMap] = useState(false);
 
   const { isLoading, isError, location } = useLocation();
@@ -28,6 +29,11 @@ export default function useHomePage() {
 
     createMap('map', location, mapOption).then((map: any) => {
       const zoomControl = new window.kakao.maps.ZoomControl();
+      const clusterer = new window.kakao.maps.MarkerClusterer({
+        map,
+        averageCenter: true,
+        minLevel: 7,
+      });
 
       map.setMinLevel(1);
       map.setMaxLevel(12);
@@ -35,7 +41,9 @@ export default function useHomePage() {
         zoomControl,
         window.kakao.maps.ControlPosition.BOTTOMRIGHT,
       );
+
       mapRef.current = map;
+      clustererRef.current = clusterer;
     });
   };
 
@@ -45,6 +53,10 @@ export default function useHomePage() {
     notes.forEach((note) => {
       const marker = getMarker(note);
       marker.setMap(map);
+
+      if (clustererRef.current) {
+        clustererRef.current.addMarker(marker);
+      }
     });
   };
 
