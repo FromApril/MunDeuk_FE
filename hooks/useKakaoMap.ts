@@ -1,7 +1,7 @@
 import { Location } from '@/interfaces/common';
 
 type MapOption = {
-  center: Location; // 중심 좌표 (필수)
+  center?: Location; // 중심 좌표 (필수)
   level?: number; // (기본값: 3)
   mapTypeId?: string; // 지도 종류 (기본값: 일반 지도)
   draggable?: boolean; // 마우스 드래그, 휠, 모바일 터치를 이용한 시점 변경(이동, 확대, 축소) 가능 여부
@@ -27,12 +27,7 @@ type MarkerOption = {
 };
 
 export default function useKakaoMap() {
-  const createMap = (
-    mapId: string,
-    location: Location,
-    level?: number,
-    option?: MapOption,
-  ) => {
+  const createMap = (mapId: string, location: Location, option?: MapOption) => {
     return new Promise((resolve, reject) => {
       window.kakao.maps.load(() => {
         const container = document.getElementById(mapId);
@@ -43,7 +38,7 @@ export default function useKakaoMap() {
 
         const mapOption = {
           center,
-          level: level || 3,
+          level: 3,
           ...option,
         };
 

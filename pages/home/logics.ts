@@ -20,11 +20,16 @@ export default function useHomePage() {
   };
 
   const initMap = () => {
-    createMap('map', location, 1).then((res: any) => {
-      const map = res;
+    const mapOption = {
+      level: 1,
+      scrollwheel: true,
+      keyboardShortcuts: true,
+    };
 
+    createMap('map', location, mapOption).then((map: any) => {
       map.setMinLevel(1);
       map.setMaxLevel(12);
+      // map.addControl(window.kakao.maps.ControlPosition.TOPRIGHT);
       mapRef.current = map;
     });
   };
