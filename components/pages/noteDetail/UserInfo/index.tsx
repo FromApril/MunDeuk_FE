@@ -11,7 +11,7 @@ export default function UserInfo({ note }: UserInfoProps) {
   const { content, imageUrls, id } = note;
 
   const emotion = content.emotion || 'Default';
-  const count = [content.text, imageUrls.length];
+  const count = [content.text, imageUrls.length].filter((v) => v).length;
 
   return (
     <UserInfoSection>
