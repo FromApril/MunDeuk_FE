@@ -14,25 +14,19 @@ function Gnb() {
   return (
     <StyledGnb>
       <div>
-        <i
-          className="fa-solid fa-house fa-lg"
-          aria-label="홈"
-          onClick={() => goPage('/home')}
-        />
+        <button onClick={() => goPage('/home')}>
+          <i className="fa-solid fa-house fa-lg" aria-label="홈" />
+        </button>
       </div>
       <div>
-        <i
-          className="fa-solid fa-plus fa-lg"
-          aria-label="쪽지작성"
-          onClick={() => goPage('/noteWrite?page=1')}
-        />
+        <button onClick={() => goPage('/noteWrite?page=1')}>
+          <i className="fa-solid fa-plus fa-lg" aria-label="쪽지작성" />
+        </button>
       </div>
       <div>
-        <i
-          className="fa-solid fa-user fa-lg"
-          aria-label="마이페이지"
-          onClick={() => goPage('/myPage')}
-        />
+        <button onClick={() => goPage('/myPage')}>
+          <i className="fa-solid fa-user fa-lg" aria-label="마이페이지" />
+        </button>
       </div>
     </StyledGnb>
   );
@@ -53,4 +47,9 @@ const StyledGnb = styled.nav`
   width: 100%;
   max-width: ${layouts.deviceWidth};
   height: ${layouts.gnb};
+
+  div > button {
+    width: 50%;
+    height: ${layouts.gnb};
+  }
 `;
