@@ -27,9 +27,14 @@ export default function useHomePage() {
     };
 
     createMap('map', location, mapOption).then((map: any) => {
+      const zoomControl = new window.kakao.maps.ZoomControl();
+
       map.setMinLevel(1);
       map.setMaxLevel(12);
-      // map.addControl(window.kakao.maps.ControlPosition.TOPRIGHT);
+      map.addControl(
+        zoomControl,
+        window.kakao.maps.ControlPosition.BOTTOMRIGHT,
+      );
       mapRef.current = map;
     });
   };
