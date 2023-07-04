@@ -8,7 +8,7 @@ import { layouts } from '@/styles/layouts';
 import useHomePage from './logics';
 
 export default function HomePage() {
-  const { isLoading, isError, isHasMapImage, mapRef, initMap } = useHomePage();
+  const { isLoading, isError } = useHomePage();
 
   if (isLoading || isError) {
     return <MapLoading />;
@@ -24,10 +24,7 @@ export default function HomePage() {
 
   return (
     <PageContainer>
-      <Map ref={mapRef} id="map" />
-      {!isHasMapImage && (
-        <ReloadButton onClick={initMap}>맵 다시 불러오기</ReloadButton>
-      )}
+      <Map id="map" />
     </PageContainer>
   );
 }
@@ -35,12 +32,6 @@ export default function HomePage() {
 const Map = styled.div`
   position: relative;
   height: calc(100vh - ${layouts.gnb});
-`;
-
-const ReloadButton = styled.button`
-  ${positionAbsoluteXYCenter};
-  background-color: #ddd;
-  padding: 5px;
 `;
 
 const ErrorMessage = styled.div`

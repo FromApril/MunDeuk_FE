@@ -8,15 +8,12 @@ import { Note } from '@/interfaces/note';
 
 export default function useHomePage() {
   const router = useRouter();
-  const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<any>();
+  const mapRef = useRef<any>();
   const [isInitMap, setIsInitMap] = useState(false);
 
   const { isLoading, isError, location } = useLocation();
   const { createMap, createMarker } = useKakaoMap();
   const { data: notes } = useNotes();
-
-  const isHasMapImage = mapRef.current?.childElementCount;
 
   const goNotePickPage = (id: number) => {
     router.push(`/note/pick?id=${id}`);
@@ -28,12 +25,12 @@ export default function useHomePage() {
 
       map.setMinLevel(1);
       map.setMaxLevel(12);
-      mapInstanceRef.current = map;
+      mapRef.current = map;
     });
   };
 
   const initMarkers = (notes: Note[]) => {
-    const map = mapInstanceRef.current;
+    const map = mapRef.current;
 
     notes.forEach((note) => {
       const marker = getMarker(note);
@@ -100,7 +97,7 @@ export default function useHomePage() {
   // 맵 초기화
   useEffect(() => {
     if (isLoading) return;
-    if (mapInstanceRef.current) return;
+    if (mapRef.current) return;
 
     initMap();
     setIsInitMap(true);
@@ -114,10 +111,8 @@ export default function useHomePage() {
   }, [isInitMap, notes]);
 
   return {
-    mapRef,
     isLoading,
     isError,
-    isHasMapImage,
     initMap,
   };
 }
