@@ -10,7 +10,7 @@ import useHomePage from './logics';
 export default function HomePage() {
   const { isLoading, isError } = useHomePage();
 
-  if (isLoading || isError) {
+  if (isLoading) {
     return <MapLoading />;
   }
 
