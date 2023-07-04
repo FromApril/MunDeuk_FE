@@ -45,6 +45,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:5.59.2"],\
             ["autoprefixer", "virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:10.4.14"],\
             ["axios", "npm:1.4.0"],\
+            ["chromatic", "npm:6.19.9"],\
             ["cypress", "npm:12.9.0"],\
             ["dayjs", "npm:1.11.7"],\
             ["eslint", "npm:8.39.0"],\
@@ -6137,6 +6138,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["chromatic", [\
+        ["npm:6.19.9", {\
+          "packageLocation": "./.yarn/cache/chromatic-npm-6.19.9-8d244191ba-50552c3043.zip/node_modules/chromatic/",\
+          "packageDependencies": [\
+            ["chromatic", "npm:6.19.9"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["ci-info", [\
         ["npm:3.8.0", {\
           "packageLocation": "./.yarn/cache/ci-info-npm-3.8.0-d56a0b67d6-d0a4d31604.zip/node_modules/ci-info/",\
@@ -7914,6 +7924,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:5.59.2"],\
             ["autoprefixer", "virtual:a7875d6d0c1d8c45599ab26b073550d0fd71ba96f0ba5a21c2383d04422f512657f7196d5bec16fb3d8c3985d1084c1d121c630d1d7d1b063ea2012cf0749590#npm:10.4.14"],\
             ["axios", "npm:1.4.0"],\
+            ["chromatic", "npm:6.19.9"],\
             ["cypress", "npm:12.9.0"],\
             ["dayjs", "npm:1.11.7"],\
             ["eslint", "npm:8.39.0"],\
