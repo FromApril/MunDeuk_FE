@@ -5,6 +5,7 @@ import EmotionIcon from '@/components/common/EmotionIcon';
 import BottomLayout from '@/components/layouts/BottomLayout';
 import Navigation from '@/components/layouts/Navigation';
 import PageContainer from '@/components/layouts/PageContainer';
+import { emotionColors } from '@/styles/colors';
 import { positionAbsoluteXYCenter } from '@/styles/common';
 import { layouts } from '@/styles/layouts';
 
@@ -28,7 +29,7 @@ export default function NotePickPage() {
             name={emotion}
             width={'35vh'}
             height={'35vh'}
-            fill="#6bafff"
+            fill={emotionColors[emotion]}
           />
         </SelectedEmotion>
       )}

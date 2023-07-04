@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import EmotionIcon from '@/components/common/EmotionIcon';
 import EmotionSelectModal from '@/components/pages/noteWrite/EmotionSelectModal';
 import useNoteWriteContents from '@/hooks/useNoteWriteContents';
+import { emotionColors } from '@/styles/colors';
 import { positionAbsoluteXYCenter } from '@/styles/common';
 import { layouts } from '@/styles/layouts';
 
@@ -18,7 +19,12 @@ export default function Emotion() {
   return (
     <EmotionContainer>
       <SelectedEmotion>
-        <EmotionIcon name={emotion} width={200} height={200} fill="#ddd" />
+        <EmotionIcon
+          name={emotion}
+          width={200}
+          height={200}
+          fill={emotionColors[emotion]}
+        />
       </SelectedEmotion>
       <EmotionSelectModal
         emotion={emotion}

@@ -1,16 +1,10 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
-import React from 'react';
+import { memo } from 'react';
 
 import { layouts } from '@/styles/layouts';
 
-// TODOS
-// 1. 라우팅 페이지는 임의로 지정
-// 2. 아이콘은 커스텀하게 바뀌어야 할듯
-// 3. 전반적인 스타일 조정될 수 있음
-// 4. GNB SHOW/HIDE 처리가 상위 컴포넌트에서 이뤄져야함 (메인페이지에서만 GNB SHOW, 나머지 HIDE) 상태체크필요
-
-export default function Gnb() {
+function Gnb() {
   const router = useRouter();
 
   const goPage = (pathname: '/home' | '/noteWrite?page=1' | '/myPage') => {
@@ -20,29 +14,25 @@ export default function Gnb() {
   return (
     <StyledGnb>
       <div>
-        <i
-          className="fa-solid fa-house"
-          aria-label="홈"
-          onClick={() => goPage('/home')}
-        />
+        <button onClick={() => goPage('/home')}>
+          <i className="fa-solid fa-house fa-lg" aria-label="홈" />
+        </button>
       </div>
       <div>
-        <i
-          className="fa-solid fa-plus"
-          aria-label="쪽지작성"
-          onClick={() => goPage('/noteWrite?page=1')}
-        />
+        <button onClick={() => goPage('/noteWrite?page=1')}>
+          <i className="fa-solid fa-plus fa-lg" aria-label="쪽지작성" />
+        </button>
       </div>
       <div>
-        <i
-          className="fa-solid fa-user"
-          aria-label="마이페이지"
-          onClick={() => goPage('/myPage')}
-        />
+        <button onClick={() => goPage('/myPage')}>
+          <i className="fa-solid fa-user fa-lg" aria-label="마이페이지" />
+        </button>
       </div>
     </StyledGnb>
   );
 }
+
+export default memo(Gnb);
 
 const StyledGnb = styled.nav`
   background-color: #ddd;
@@ -57,4 +47,9 @@ const StyledGnb = styled.nav`
   width: 100%;
   max-width: ${layouts.deviceWidth};
   height: ${layouts.gnb};
+
+  div > button {
+    width: 50%;
+    height: ${layouts.gnb};
+  }
 `;
