@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import useNotes from '@/hooks/queries/useNotes';
 import useKakaoMap from '@/hooks/useKakaoMap';
 import useLocation from '@/hooks/useLocation';
-import { Location } from '@/interfaces/common';
 import { Note } from '@/interfaces/note';
 
 export default function useHomePage() {
@@ -34,32 +33,38 @@ export default function useHomePage() {
   };
 
   const initMarkers = (notes: Note[]) => {
-    console.log('initMarkers');
-
     const map = mapInstanceRef.current;
 
-    notes.forEach((note, idx) => {
-      const marker = getMarker(note, idx, location);
+    notes.forEach((note) => {
+      const marker = getMarker(note);
       marker.setMap(map);
     });
   };
 
-  const getMarker = (note: Note, idx: number, location: Location) => {
-    const { id } = note;
-    // const { latitude, longitude, id } = note;
-    const { latitude, longitude } = location;
+  const getEmotionSvg = (emotion: Note['content']['emotion']) => {
+    if (emotion === 'Depressed') {
+      return 'depressed.svg';
+    }
 
-    const imageType =
-      idx % 4 === 0
-        ? 'depressed.svg'
-        : idx % 4 === 1
-        ? 'flutter.svg'
-        : idx % 4 === 2
-        ? 'glad.svg'
-        : idx % 4 === 3
-        ? 'touched.svg'
-        : '';
+    if (emotion === 'Flutter') {
+      return 'flutter.svg';
+    }
 
+    if (emotion === 'Glad') {
+      return 'glad.svg';
+    }
+
+    if (emotion === 'Touched') {
+      return 'touched.svg';
+    }
+
+    return 'default.svg';
+  };
+
+  const getMarker = (note: Note) => {
+    const { latitude, longitude, id, content } = note;
+
+    const imageType = getEmotionSvg(content.emotion);
     const imageSrc = window.location.origin + '/images/' + imageType;
     const imageSize = new window.kakao.maps.Size(30, 30);
     const imageOption = { offset: new window.kakao.maps.Point(30, 30) };
@@ -72,8 +77,6 @@ export default function useHomePage() {
 
     const marker = createMarker({
       location: {
-        // latitude,
-        // longitude,
         latitude: latitude + Math.random() * 0.001,
         longitude: longitude + Math.random() * 0.001,
       },
@@ -106,7 +109,6 @@ export default function useHomePage() {
   // 맵 초기화 & 쪽지리스트 API 성공 후, 마커 삽입
   useEffect(() => {
     if (!notes) return;
-    // if (!isInitMap) return;
 
     initMarkers(notes);
   }, [isInitMap, notes]);
