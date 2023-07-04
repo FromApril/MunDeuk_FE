@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 import EmotionIcon from '@/components/common/EmotionIcon';
 import { Note } from '@/interfaces/note';
+import { emotionColors } from '@/styles/colors';
 
 type UserInfoProps = {
   note: Note;
@@ -16,7 +17,12 @@ export default function UserInfo({ note }: UserInfoProps) {
   return (
     <UserInfoSection>
       <div>
-        <EmotionIcon name={emotion} width={55} height={55} fill="#6bafff" />
+        <EmotionIcon
+          name={emotion}
+          width={55}
+          height={55}
+          fill={emotionColors[emotion]}
+        />
       </div>
       <div>
         <p>{id}님의 쪽지</p>
