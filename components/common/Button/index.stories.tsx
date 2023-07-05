@@ -16,21 +16,21 @@ type Story = StoryObj<typeof Button>;
 export const Primary: Story = {
   args: {
     variant: 'primary',
-    children: 'Primary'
-  }
+    children: 'Primary',
+  },
 };
 
 export const Dashed: Story = {
   args: {
     variant: 'dashed',
-    children: 'Dashed'
-  }
-}
+    children: 'Dashed',
+  },
+};
 
 export const Disabled: Story = {
   args: {
     ...Primary.args,
     children: 'Disabled',
     disabled: true,
-  }
-}
+  },
+};
