@@ -10,6 +10,8 @@ jobs:
         with:
           fetch-depth: 0
       - uses: pnpm/action-setup@v2
+        with: 
+          version: latest
       - run: pnpm install
       - uses: chromaui/action@v1
         with:
