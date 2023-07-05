@@ -67,9 +67,6 @@ dependencies:
     version: 5.0.4
 
 devDependencies:
-  '@babel/core':
-    specifier: ^7.22.6
-    version: 7.22.6
   '@storybook/addon-a11y':
     specifier: ^7.0.25
     version: 7.0.25(react-dom@18.2.0)(react@18.2.0)

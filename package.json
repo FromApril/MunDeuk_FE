@@ -1,5 +1,5 @@
 {
-  "name": "fe-boilerplate",
+  "name": "mundeuk_fe",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -9,8 +9,8 @@
     "lint": "next lint",
     "test": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:e2e": "cypress run",
-    "e2e": "cypress open",
+    "test:e2e": "./node_modules/.bin/cypress run",
+    "e2e": "./node_modules/.bin/cypress open",
     "version-major": "npm version major -m 'v%s' && git push --tags",
     "version-minor": "npm version minor -m 'v%s' && git push --tags",
     "version-patch": "npm version patch -m 'v%s' && git push --tags",
@@ -40,7 +40,6 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.6",
     "@storybook/addon-a11y": "^7.0.25",
     "@storybook/addon-essentials": "^7.0.25",
     "@storybook/addon-interactions": "^7.0.25",
@@ -70,6 +69,5 @@
     "next-router-mock": "^0.9.3",
     "prettier": "^2.8.8",
     "storybook": "^7.0.25"
-  },
-  "packageManager": "yarn@3.5.1"
+  }
 }
