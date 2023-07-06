@@ -5,6 +5,7 @@ import EmotionIcon from '@/components/common/EmotionIcon';
 import Navigation from '@/components/layouts/Navigation';
 import PageContainer from '@/components/layouts/PageContainer';
 import EmotionSelectModal from '@/components/pages/noteWrite/EmotionSelectModal';
+import { emotionColors } from '@/styles/colors';
 import { positionAbsoluteXYCenter } from '@/styles/common';
 import { layouts } from '@/styles/layouts';
 
@@ -18,7 +19,12 @@ export default function ContentsConfirm() {
     <PageContainer css={containerCss}>
       <Navigation isBack title="쪽지 작성" />
       <SelectedEmotion>
-        <EmotionIcon name={emotion} width={300} height={300} fill="#FF7AC5" />
+        <EmotionIcon
+          name={emotion}
+          width={300}
+          height={300}
+          fill={emotionColors[emotion]}
+        />
         <SavedContents
           today={today}
           isHavePhotos={photos.length > 0}

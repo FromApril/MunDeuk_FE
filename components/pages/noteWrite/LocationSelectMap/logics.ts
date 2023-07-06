@@ -29,7 +29,7 @@ export default function useLocationSelectMap() {
   useEffect(() => {
     if (isLoading) return;
 
-    createMap('map', location, 1).then((map: any) => {
+    createMap('map', location).then((map: any) => {
       map.setMinLevel(1);
       map.setMaxLevel(1);
 
