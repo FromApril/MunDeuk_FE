@@ -11,10 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with: 
+          version: latest
       - name: Next build
         run: |
-          yarn
-          yarn build
+          pnpm install
+          pnpm build
       - uses: actions/upload-artifact@master
         with:
           name: Next.js artifacts
@@ -24,10 +27,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with: 
+          version: latest
       - name: Unit test (Jest)
         run: |
-          yarn
-          yarn test:coverage
+          pnpm install
+          pnpm test:coverage
       # - uses: actions/upload-artifact@master
       #   with:  
       #     name: Unit-test coverage
@@ -54,6 +60,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with: 
+          version: latest
+      - name: Pnpm install
+        run: pnpm install
       - uses: actions/download-artifact@master
         with:
           name: Next.js artifacts
@@ -61,8 +72,8 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with: 
-          start: yarn start
-          command: yarn dlx cypress run
+          start: pnpm start
+          command: pnpm dlx cypress run
           record: false
 
   

@@ -5,9 +5,6 @@
 /.pnp
 .pnp.js
 
-# testing
-/coverage
-
 # next.js
 /.next/
 /out/
@@ -35,11 +32,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# yarn berry
-.yarn/*
-!.yarn/cache
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
+# jest
+/coverage
+**/__snapshots__
+
+# storybook
+.stories
