@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import EmotionIcon from '@/components/common/EmotionIcon';
 import Navigation from '@/components/layouts/Navigation';
 import PageContainer from '@/components/layouts/PageContainer';
-import EmotionSelectModal from '@/components/pages/noteWrite/EmotionSelectModal';
+import BottomButton from '@/components/pages/noteWrite/BottomButton';
 import { emotionColors } from '@/styles/colors';
 import { positionAbsoluteXYCenter } from '@/styles/common';
 import { layouts } from '@/styles/layouts';
@@ -17,7 +17,7 @@ export default function ContentsConfirm() {
 
   return (
     <PageContainer css={containerCss}>
-      <Navigation isBack title="쪽지 작성" />
+      <Navigation isBack title="작성한 쪽지 확인" />
       <SelectedEmotion>
         <EmotionIcon
           name={emotion}
@@ -31,11 +31,9 @@ export default function ContentsConfirm() {
           isHaveMusic={music.title.length > 0}
         />
       </SelectedEmotion>
-      <EmotionSelectModal
-        emotion={emotion}
-        onClick={() => null}
-        onComplete={submitForm}
-      />
+      <BottomButton variant="dashed" onClick={submitForm}>
+        쪽지 작성하기
+      </BottomButton>
     </PageContainer>
   );
 }
