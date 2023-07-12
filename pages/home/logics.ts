@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 
-import useNotes from '@/hooks/queries/useNotes';
 import useKakaoMap from '@/hooks/useKakaoMap';
 import useLocation from '@/hooks/useLocation';
 import { Note } from '@/interfaces/note';
+import useNotes from '@/queries/useNotes';
 
 export default function useHomePage() {
   const router = useRouter();
