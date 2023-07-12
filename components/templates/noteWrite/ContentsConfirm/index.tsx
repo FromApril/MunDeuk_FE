@@ -32,7 +32,7 @@ export default function ContentsConfirm() {
         />
       </SelectedEmotion>
       <BottomButton variant="dashed" onClick={submitForm}>
-        쪽지 작성하기
+        쪽지 작성완료
       </BottomButton>
     </PageContainer>
   );
