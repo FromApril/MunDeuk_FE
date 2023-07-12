@@ -25,7 +25,12 @@ export default function useNoteWriteContents() {
     resetEmotion();
   };
 
+  const isLocationEmpty = location.latitude === 0 && location.longitude === 0;
+  const isLocationError = location.latitude === -1 && location.longitude === -1;
+
   return {
+    isLocationEmpty,
+    isLocationError,
     location,
     text,
     photos,
