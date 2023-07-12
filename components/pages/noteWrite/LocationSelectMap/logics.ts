@@ -15,6 +15,7 @@ export default function useLocationSelectMap() {
 
     marker.setMap(map);
     marker.setDraggable(true);
+    setLocation(location);
 
     window.kakao.maps.event.addListener(marker, 'dragend', function () {
       const location = marker.getPosition();
