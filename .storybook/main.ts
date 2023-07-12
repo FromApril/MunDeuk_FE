@@ -14,6 +14,10 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
+  previewBody: (body) => `
+    ${body}
+    <script src="https://kit.fontawesome.com/32d07c7523.js" crossOrigin="anonymous"></script>
+  `,
   webpackFinal: async (config) => {
     if (!config.module || !config.module.rules) {
       return config;
