@@ -1,20 +1,15 @@
 import styled from '@emotion/styled';
-import { useRouter } from 'next/router';
 
 import EmotionIcon from '@/components/common/EmotionIcon';
 import EmotionSelectModal from '@/components/pages/noteWrite/EmotionSelectModal';
-import useNoteWriteContents from '@/hooks/useNoteWriteContents';
 import { emotionColors } from '@/styles/colors';
 import { positionAbsoluteXYCenter } from '@/styles/common';
 import { layouts } from '@/styles/layouts';
 
-export default function Emotion() {
-  const router = useRouter();
-  const { emotion, setEmotion } = useNoteWriteContents();
+import useEmotion from './logics';
 
-  const handleComplete = () => {
-    router.push('/noteWrite?page=3');
-  };
+export default function Emotion() {
+  const { emotion, setEmotion, handleComplete } = useEmotion();
 
   return (
     <EmotionContainer>
