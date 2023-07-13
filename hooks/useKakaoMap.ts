@@ -57,9 +57,6 @@ export default function useKakaoMap() {
       position,
     };
 
-    console.log('createMarker');
-    console.log(markerOption);
-
     return new window.kakao.maps.Marker(markerOption);
   };
 

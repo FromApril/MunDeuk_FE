@@ -4,17 +4,20 @@ import { useEffect, useRef, useState } from 'react';
 import useKakaoMap from '@/hooks/useKakaoMap';
 import useLocation from '@/hooks/useLocation';
 import { Note } from '@/interfaces/note';
+import useMutationNotes from '@/queries/useMutationNotes';
 import useNotes from '@/queries/useNotes';
 
 export default function useHomePage() {
   const router = useRouter();
   const mapRef = useRef<any>();
+  const markerIdsRef = useRef(new Set<number>());
   const clustererRef = useRef<any>();
   const [isInitMap, setIsInitMap] = useState(false);
 
   const { isLoading, isError, location } = useLocation();
   const { createMap, createMarker } = useKakaoMap();
   const { data: notes } = useNotes();
+  const { mutate } = useMutationNotes();
 
   const goNotePickPage = (id: number) => {
     router.push(`/note/pick?id=${id}`);
@@ -42,8 +45,26 @@ export default function useHomePage() {
         window.kakao.maps.ControlPosition.BOTTOMRIGHT,
       );
 
+      addZoomChangeEvent(map);
+
       mapRef.current = map;
       clustererRef.current = clusterer;
+    });
+  };
+
+  const addZoomChangeEvent = (map: any) => {
+    window.kakao.maps.event.addListener(map, 'zoom_changed', () => {
+      const position = map.getCenter();
+      const location = {
+        latitude: position.La,
+        longitude: position.Ma,
+      };
+
+      mutate(location, {
+        onSuccess: ({ data: notes }) => {
+          initMarkers(notes);
+        },
+      });
     });
   };
 
@@ -52,10 +73,13 @@ export default function useHomePage() {
 
     notes.forEach((note) => {
       const marker = getMarker(note);
-      marker.setMap(map);
 
-      if (clustererRef.current) {
-        clustererRef.current.addMarker(marker);
+      if (marker) {
+        marker.setMap(map);
+
+        if (clustererRef.current) {
+          clustererRef.current.addMarker(marker);
+        }
       }
     });
   };
@@ -83,6 +107,12 @@ export default function useHomePage() {
   const getMarker = (note: Note) => {
     const { latitude, longitude, id, content } = note;
 
+    if (markerIdsRef.current.has(id)) {
+      return null;
+    } else {
+      markerIdsRef.current.add(id);
+    }
+
     const imageType = getEmotionSvg(content.emotion);
     const imageSrc = window.location.origin + '/images/' + imageType;
     const imageSize = new window.kakao.maps.Size(30, 30);
@@ -96,8 +126,8 @@ export default function useHomePage() {
 
     const marker = createMarker({
       location: {
-        latitude: latitude + Math.random() * 0.001,
-        longitude: longitude + Math.random() * 0.001,
+        latitude: latitude,
+        longitude: longitude,
       },
       title: id,
       image: markerImage,
