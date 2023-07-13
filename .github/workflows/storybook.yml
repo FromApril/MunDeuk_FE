@@ -1,6 +1,9 @@
 name: "Storybook Deployment"
 
-on: push
+on: 
+  pull_request:
+    branches:
+      - develop
 
 jobs:
   test:
