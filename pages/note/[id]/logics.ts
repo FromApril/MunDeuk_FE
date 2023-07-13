@@ -2,8 +2,8 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
 import { subscribeNote } from '@/apis/note';
-import useNotes from '@/hooks/queries/useNotes';
 import useLoading from '@/hooks/useLoading';
+import useNotes from '@/queries/useNotes';
 
 export default function useNoteDetailPage() {
   const router = useRouter();

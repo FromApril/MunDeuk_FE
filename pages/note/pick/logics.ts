@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import useNotes from '@/hooks/queries/useNotes';
+import useNotes from '@/queries/useNotes';
 
 export default function useNotePickPage() {
   const router = useRouter();

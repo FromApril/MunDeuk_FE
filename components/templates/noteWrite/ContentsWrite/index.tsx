@@ -1,19 +1,18 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
 
-import Button from '@/components/common/Button';
-import BottomLayout from '@/components/layouts/BottomLayout';
 import Navigation from '@/components/layouts/Navigation';
 import PageContainer from '@/components/layouts/PageContainer';
-import MusicContent from '@/components/pages/noteWrite/MusicContent';
+import BottomButton from '@/components/pages/noteWrite/BottomButton';
+// import MusicContent from '@/components/pages/noteWrite/MusicContent';
 import PhotoContent from '@/components/pages/noteWrite/PhotoContent';
 import TextContent from '@/components/pages/noteWrite/TextContent';
-import { textAtom } from '@/recoil/noteWrite/atoms';
+import useNoteWriteContents from '@/hooks/useNoteWriteContents';
 import { layouts } from '@/styles/layouts';
 
 export default function ContentsWrite() {
+  const { text } = useNoteWriteContents();
+
   return (
     <PageContainer css={containerCss}>
       <Navigation isBack title="쪽지 작성" />
@@ -31,27 +30,17 @@ export default function ContentsWrite() {
           <MusicContent />
         </MusicSection> */}
       </ContentBody>
-      <BottomButton />
+      <BottomButton
+        variant="primary"
+        nextUrl="/noteWrite?page=4"
+        disabled={text === ''}
+      >
+        다음
+      </BottomButton>
     </PageContainer>
   );
 }
 
-function BottomButton() {
-  const router = useRouter();
-  const text = useRecoilValue(textAtom);
-
-  const goNextPage = () => router.push('/noteWrite?page=4');
-
-  return (
-    <BottomLayout>
-      <Button variant="primary" disabled={text === ''} onClick={goNextPage}>
-        완료
-      </Button>
-    </BottomLayout>
-  );
-}
-
-// styled
 const containerCss = css`
   padding-bottom: calc(${layouts.button} * 2);
 `;
@@ -74,6 +63,6 @@ const PhotoSection = styled.section`
   margin-top: 20px;
 `;
 
-const MusicSection = styled.section`
-  margin-top: 20px;
-`;
+// const MusicSection = styled.section`
+//   margin-top: 20px;
+// `;

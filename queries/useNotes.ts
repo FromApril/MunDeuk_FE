@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getNotes } from '@/apis/note';
 import { QUERIES } from '@/constants/queries';
 
-import useLocation from '../useLocation';
+import useLocation from '../hooks/useLocation';
 
 export default function useNotes() {
   const { isLoading, isError, location } = useLocation();
