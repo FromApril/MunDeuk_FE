@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import useKakaoMap from '@/hooks/useKakaoMap';
 import useLocation from '@/hooks/useLocation';
+import useMain from '@/hooks/useMain';
 import { Note } from '@/interfaces/note';
 import useMutationNotes from '@/queries/useMutationNotes';
 import useNotes from '@/queries/useNotes';
@@ -14,8 +15,9 @@ export default function useHomePage() {
   const clustererRef = useRef<any>();
   const [isInitMap, setIsInitMap] = useState(false);
 
-  const { isLoading, isError, location } = useLocation();
+  const { isLoading, isError, location, isEmptyLocation } = useLocation();
   const { createMap, createMarker } = useKakaoMap();
+  const { main, setMain } = useMain();
   const { data: notes } = useNotes();
   const { mutate } = useMutationNotes();
 
@@ -23,14 +25,24 @@ export default function useHomePage() {
     router.push(`/note/pick?id=${id}`);
   };
 
+  const getMapLocation = () => {
+    // console.log('getMapLocation');
+
+    // console.log(main.location);
+    // console.log(location);
+
+    return location;
+    // return isEmptyLocation(main.location) ? location : main.location;
+  };
+
   const initMap = () => {
     const mapOption = {
-      level: 1,
+      level: main.mapLevel,
       scrollwheel: true,
       keyboardShortcuts: true,
     };
 
-    createMap('map', location, mapOption).then((map: any) => {
+    createMap('map', getMapLocation(), mapOption).then((map: any) => {
       const zoomControl = new window.kakao.maps.ZoomControl();
       const clusterer = new window.kakao.maps.MarkerClusterer({
         map,
@@ -46,19 +58,43 @@ export default function useHomePage() {
       );
 
       addZoomChangeEvent(map);
+      // addCenterChangedEvent(map);
 
       mapRef.current = map;
       clustererRef.current = clusterer;
     });
   };
 
+  const addCenterChangedEvent = (map: any) => {
+    window.kakao.maps.event.addListener(map, 'center_changed', () => {
+      console.log('center_changed_event');
+
+      const position = map.getCenter();
+      console.log(position);
+
+      setMain((prev) => ({
+        ...prev,
+        location: {
+          latitude: position.La,
+          longitude: position.Ma,
+        },
+      }));
+    });
+  };
+
   const addZoomChangeEvent = (map: any) => {
     window.kakao.maps.event.addListener(map, 'zoom_changed', () => {
+      const mapLevel = map.getLevel();
       const position = map.getCenter();
       const location = {
         latitude: position.La,
         longitude: position.Ma,
       };
+
+      setMain((prev) => ({
+        ...prev,
+        mapLevel,
+      }));
 
       mutate(location, {
         onSuccess: ({ data: notes }) => {
@@ -72,14 +108,13 @@ export default function useHomePage() {
     const map = mapRef.current;
 
     notes.forEach((note) => {
+      if (markerIdsRef.current.has(note.id)) return;
+
       const marker = getMarker(note);
+      marker.setMap(map);
 
-      if (marker) {
-        marker.setMap(map);
-
-        if (clustererRef.current) {
-          clustererRef.current.addMarker(marker);
-        }
+      if (clustererRef.current) {
+        clustererRef.current.addMarker(marker);
       }
     });
   };
@@ -107,11 +142,7 @@ export default function useHomePage() {
   const getMarker = (note: Note) => {
     const { latitude, longitude, id, content } = note;
 
-    if (markerIdsRef.current.has(id)) {
-      return null;
-    } else {
-      markerIdsRef.current.add(id);
-    }
+    markerIdsRef.current.add(id);
 
     const imageType = getEmotionSvg(content.emotion);
     const imageSrc = window.location.origin + '/images/' + imageType;
@@ -157,7 +188,7 @@ export default function useHomePage() {
 
   // 맵 초기화 & 쪽지리스트 API 성공 후, 마커 삽입
   useEffect(() => {
-    if (!notes) return;
+    if (!notes || !isInitMap) return;
 
     initMarkers(notes);
   }, [isInitMap, notes]);
