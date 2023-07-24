@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { postNoteWithImage } from '@/apis/note';
 import useLoading from '@/hooks/useLoading';
 import useNoteWriteContents from '@/hooks/useNoteWriteContents';
+import useUser from '@/hooks/useUser';
 
 export default function useContentsConfirm() {
   const router = useRouter();
@@ -12,6 +13,7 @@ export default function useContentsConfirm() {
   const { location, text, photos, music, emotion, resetAllContents } =
     useNoteWriteContents();
   const { showLoading, hideLoading } = useLoading();
+  const { user } = useUser();
 
   const getFormData = () => {
     const form = new FormData();
@@ -25,7 +27,7 @@ export default function useContentsConfirm() {
     );
     form.append('latitude', String(location.latitude));
     form.append('longitude', String(location.longitude));
-    form.append('writerId', String(3));
+    form.append('writerId', String(user.id));
 
     for (const photo of photos) {
       form.append('files', photo, photo.name);
