@@ -24,7 +24,7 @@ export default function NotePickPage() {
         <p>쪽지를 함께 열어볼까요?</p>
       </NotePickMessage>
       {emotion && (
-        <SelectedEmotion>
+        <SelectedEmotion onClick={goNoteDetailPage}>
           <EmotionIcon
             name={emotion}
             width={'35vh'}
