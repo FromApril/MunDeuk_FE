@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router';
 
-import useNotes from '@/queries/useNotes';
+import useUser from '@/hooks/useUser';
+import useNote from '@/queries/useNote';
 
 export default function useNotePickPage() {
   const router = useRouter();
-  const { data: notes } = useNotes();
   const noteId = Number(router.query.id);
-  const note = notes?.find((note) => note.id == noteId);
+  const { user } = useUser();
+  const { data: note } = useNote(noteId, user.id);
 
   const goHomePage = () => router.push('/home');
 
