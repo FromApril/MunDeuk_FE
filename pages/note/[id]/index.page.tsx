@@ -15,8 +15,6 @@ export default function NoteDetailPage() {
     return <NoNote onClick={goHomePage} />;
   }
 
-  console.log(note);
-
   return (
     <PageContainer css={containerCss}>
       <UserInfo note={note} />
