@@ -21,8 +21,8 @@ export default function useLocationSelectMap() {
       const location = marker.getPosition();
 
       setLocation({
-        latitude: location.La,
-        longitude: location.Ma,
+        latitude: location.Ma,
+        longitude: location.La,
       });
     });
   };

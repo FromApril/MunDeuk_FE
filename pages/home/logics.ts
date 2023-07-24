@@ -87,8 +87,8 @@ export default function useHomePage() {
       const mapLevel = map.getLevel();
       const position = map.getCenter();
       const location = {
-        latitude: position.La,
-        longitude: position.Ma,
+        latitude: position.Ma,
+        longitude: position.La,
       };
 
       setMain((prev) => ({
