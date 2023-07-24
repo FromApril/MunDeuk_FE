@@ -3,20 +3,19 @@ import { useRouter } from 'next/router';
 
 import { subscribeNote } from '@/apis/note';
 import useLoading from '@/hooks/useLoading';
-import useNotes from '@/queries/useNotes';
+import useUser from '@/hooks/useUser';
+import useNote from '@/queries/useNote';
 
 export default function useNoteDetailPage() {
   const router = useRouter();
-  const { data: notes } = useNotes();
   const { mutate } = useMutation(
     (payload: Parameters<typeof subscribeNote>[0]) => subscribeNote(payload),
   );
   const { showLoading, hideLoading } = useLoading();
+  const { user } = useUser();
 
   const noteId = Number(router.query.id);
-  const note = notes?.find((note) => note.id == noteId);
-
-  console.log(router.query, noteId, note);
+  const { data: note } = useNote(noteId, user.id);
 
   const goHomePage = () => router.push('/home');
 
@@ -25,7 +24,7 @@ export default function useNoteDetailPage() {
 
     mutate(
       {
-        viewerId: 3,
+        viewerId: user.id,
         noteId,
       },
       {
