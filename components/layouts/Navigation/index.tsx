@@ -4,61 +4,72 @@ import { useRouter } from 'next/router';
 import Icon from '@/components/common/Icon';
 
 type NavigationProps = {
-  isBack?: boolean;
-  isComplete?: boolean;
-  title?: string;
-  onBack?: () => void;
-  onComplete?: () => void;
+  children: React.ReactNode;
 };
 
-export default function Navigation({
-  isBack,
-  isComplete,
-  title,
-  onBack,
-  onComplete,
-}: NavigationProps) {
+type BackProps = {
+  onClick?: () => void;
+};
+
+type TitleProps = {
+  children: React.ReactNode;
+};
+
+type CompleteProps = {
+  onClick: () => void;
+};
+
+function Navigation({ children }: NavigationProps) {
+  return <StyledNavigation>{children}</StyledNavigation>;
+}
+
+Navigation.Back = function Back({ onClick }: BackProps) {
   const router = useRouter();
 
   return (
-    <StyledNavigation>
-      <div>
-        {isBack && (
-          <Icon
-            name="ArrowRight"
-            width={20}
-            height={20}
-            onClick={onBack || router.back}
-          />
-        )}
-      </div>
-      <div>{title}</div>
-      <div>{isComplete && <div onClick={onComplete}>완료</div>}</div>
-    </StyledNavigation>
+    <StyledBack>
+      <Icon
+        name="ArrowRight"
+        width={20}
+        height={20}
+        onClick={onClick || router.back}
+      />
+    </StyledBack>
   );
-}
+};
+
+Navigation.Title = function Title({ children }: TitleProps) {
+  return <StyledTitle>{children}</StyledTitle>;
+};
+
+Navigation.Complete = function Complete({ onClick }: CompleteProps) {
+  return <StyledComplete onClick={onClick}>완료</StyledComplete>;
+};
+
+export default Navigation;
 
 const StyledNavigation = styled.div`
   background-color: #fff;
-  display: flex;
+  display: grid;
   align-items: center;
   padding: 0 20px;
   height: 50px;
+`;
 
-  & > div:nth-of-type(1) {
-    flex: 0;
-    cursor: pointer;
-  }
+const StyledBack = styled.div`
+  flex: 0;
+  cursor: pointer;
+`;
 
-  & > div:nth-of-type(2) {
-    flex: auto;
-    text-align: center;
-    font-weight: bold;
-  }
+const StyledTitle = styled.div`
+  flex: auto;
+  text-align: center;
+  font-weight: bold;
+`;
 
-  & > div:nth-of-type(3) {
-    flex: 0 0 30px;
-    font-weight: bold;
-    cursor: pointer;
-  }
+const StyledComplete = styled.div`
+  flex: 0 0 30px;
+  justify-self: flex-end;
+  font-weight: bold;
+  cursor: pointer;
 `;
