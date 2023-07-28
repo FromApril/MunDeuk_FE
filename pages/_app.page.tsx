@@ -5,6 +5,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
@@ -47,7 +48,7 @@ export default function App({ Component, pageProps }: AppProps) {
               </PageLayout>
             </RecoilRoot>
           </Hydrate>
-          {/* <ReactQueryDevtools initialIsOpen={false} position="top-right" /> */}
+          <ReactQueryDevtools initialIsOpen={false} position="top-right" />
         </QueryClientProvider>
       </RootErrorBoundary>
       <Script
