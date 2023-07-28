@@ -6,6 +6,8 @@ import useLocation from '@/hooks/useLocation';
 import { locationAtom } from '@/recoil/noteWrite/atoms';
 
 export default function useLocationSelectMap() {
+  const MAP_MAX_LEVEL = 4;
+
   const { isLoading, isError, location, getLocationByPosition } = useLocation();
   const { createMap, createMarker } = useKakaoMap();
   const setLocation = useSetRecoilState(locationAtom);
@@ -17,9 +19,11 @@ export default function useLocationSelectMap() {
     marker.setDraggable(true);
     setLocation(location);
 
-    window.kakao.maps.event.addListener(marker, 'dragend', function () {
+    window.kakao.maps.event.addListener(marker, 'dragend', () => {
       const position = marker.getPosition();
       const location = getLocationByPosition(position);
+
+      console.log(location);
 
       setLocation(location);
     });
@@ -30,7 +34,7 @@ export default function useLocationSelectMap() {
 
     createMap('map', location).then((map: any) => {
       map.setMinLevel(1);
-      map.setMaxLevel(1);
+      map.setMaxLevel(MAP_MAX_LEVEL);
 
       initMarker(map);
     });
