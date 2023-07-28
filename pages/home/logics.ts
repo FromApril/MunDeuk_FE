@@ -7,6 +7,7 @@ import useMain from '@/hooks/useMain';
 import { Note } from '@/interfaces/note';
 import useMutationNotes from '@/queries/useMutationNotes';
 import useNotes from '@/queries/useNotes';
+import { debounce } from '@/utils/commonUtil';
 
 export default function useHomePage() {
   const router = useRouter();
@@ -15,7 +16,13 @@ export default function useHomePage() {
   const clustererRef = useRef<any>();
   const [isInitMap, setIsInitMap] = useState(false);
 
-  const { isLoading, isError, location, isEmptyLocation } = useLocation();
+  const {
+    isLoading,
+    isError,
+    location,
+    isEmptyLocation,
+    getLocationByPosition,
+  } = useLocation();
   const { createMap, createMarker } = useKakaoMap();
   const { main, setMain } = useMain();
   const { data: notes } = useNotes();
@@ -26,13 +33,7 @@ export default function useHomePage() {
   };
 
   const getMapLocation = () => {
-    // console.log('getMapLocation');
-
-    // console.log(main.location);
-    // console.log(location);
-
-    return location;
-    // return isEmptyLocation(main.location) ? location : main.location;
+    return isEmptyLocation(main.location) ? location : main.location;
   };
 
   const initMap = () => {
@@ -58,7 +59,7 @@ export default function useHomePage() {
       );
 
       addZoomChangeEvent(map);
-      // addCenterChangedEvent(map);
+      addCenterChangedEvent(map);
 
       mapRef.current = map;
       clustererRef.current = clusterer;
@@ -66,41 +67,35 @@ export default function useHomePage() {
   };
 
   const addCenterChangedEvent = (map: any) => {
-    window.kakao.maps.event.addListener(map, 'center_changed', () => {
-      console.log('center_changed_event');
+    window.kakao.maps.event.addListener(
+      map,
+      'center_changed',
+      debounce(() => {
+        const position = map.getCenter();
+        const location = getLocationByPosition(position);
 
-      const position = map.getCenter();
-      console.log(position);
+        setMain((prev) => ({
+          ...prev,
+          location,
+        }));
 
-      setMain((prev) => ({
-        ...prev,
-        location: {
-          latitude: position.La,
-          longitude: position.Ma,
-        },
-      }));
-    });
+        mutate(location, {
+          onSuccess: ({ data: notes }) => {
+            initMarkers(notes);
+          },
+        });
+      }, 250),
+    );
   };
 
   const addZoomChangeEvent = (map: any) => {
     window.kakao.maps.event.addListener(map, 'zoom_changed', () => {
       const mapLevel = map.getLevel();
-      const position = map.getCenter();
-      const location = {
-        latitude: position.Ma,
-        longitude: position.La,
-      };
 
       setMain((prev) => ({
         ...prev,
         mapLevel,
       }));
-
-      mutate(location, {
-        onSuccess: ({ data: notes }) => {
-          initMarkers(notes);
-        },
-      });
     });
   };
 
