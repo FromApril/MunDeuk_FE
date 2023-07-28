@@ -16,6 +16,8 @@ import PageLayout from '@/components/layouts/PageLayout';
 import RootErrorBoundary from '@/components/layouts/RootErrorBoundary';
 import GlobalStyle from '@/styles/Global';
 
+import { version } from '../package.json';
+
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
     () =>
@@ -36,7 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui, viewport-fit=cover"
         />
-        <title>Mundeuk FE</title>
+        <title>Mundeuk v{version}</title>
       </Head>
       <RootErrorBoundary>
         <QueryClientProvider client={queryClient}>
