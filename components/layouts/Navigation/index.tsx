@@ -23,7 +23,7 @@ function Navigation({ children }: NavigationProps) {
   return <StyledNavigation>{children}</StyledNavigation>;
 }
 
-Navigation.Back = function Back({ onClick }: BackProps) {
+function Back({ onClick }: BackProps) {
   const router = useRouter();
 
   return (
@@ -36,17 +36,21 @@ Navigation.Back = function Back({ onClick }: BackProps) {
       />
     </StyledBack>
   );
-};
+}
 
-Navigation.Title = function Title({ children }: TitleProps) {
+function Title({ children }: TitleProps) {
   return <StyledTitle>{children}</StyledTitle>;
-};
+}
 
-Navigation.Complete = function Complete({ onClick }: CompleteProps) {
+function Complete({ onClick }: CompleteProps) {
   return <StyledComplete onClick={onClick}>완료</StyledComplete>;
-};
+}
 
-export default Navigation;
+export default Object.assign(Navigation, {
+  Back,
+  Title,
+  Complete,
+});
 
 const StyledNavigation = styled.div`
   background-color: #fff;
