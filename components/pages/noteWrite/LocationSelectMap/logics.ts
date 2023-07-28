@@ -6,7 +6,7 @@ import useLocation from '@/hooks/useLocation';
 import { locationAtom } from '@/recoil/noteWrite/atoms';
 
 export default function useLocationSelectMap() {
-  const { isLoading, isError, location } = useLocation();
+  const { isLoading, isError, location, getLocationByPosition } = useLocation();
   const { createMap, createMarker } = useKakaoMap();
   const setLocation = useSetRecoilState(locationAtom);
 
@@ -18,12 +18,10 @@ export default function useLocationSelectMap() {
     setLocation(location);
 
     window.kakao.maps.event.addListener(marker, 'dragend', function () {
-      const location = marker.getPosition();
+      const position = marker.getPosition();
+      const location = getLocationByPosition(position);
 
-      setLocation({
-        latitude: location.Ma,
-        longitude: location.La,
-      });
+      setLocation(location);
     });
   };
 
