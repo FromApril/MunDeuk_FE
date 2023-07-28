@@ -5,6 +5,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
@@ -14,6 +15,8 @@ import { RecoilRoot } from 'recoil';
 import PageLayout from '@/components/layouts/PageLayout';
 import RootErrorBoundary from '@/components/layouts/RootErrorBoundary';
 import GlobalStyle from '@/styles/Global';
+
+import { version } from '../package.json';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -35,7 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui, viewport-fit=cover"
         />
-        <title>Mundeuk FE</title>
+        <title>Mundeuk v{version}</title>
       </Head>
       <RootErrorBoundary>
         <QueryClientProvider client={queryClient}>
@@ -47,7 +50,7 @@ export default function App({ Component, pageProps }: AppProps) {
               </PageLayout>
             </RecoilRoot>
           </Hydrate>
-          {/* <ReactQueryDevtools initialIsOpen={false} position="top-right" /> */}
+          <ReactQueryDevtools initialIsOpen={false} position="top-right" />
         </QueryClientProvider>
       </RootErrorBoundary>
       <Script

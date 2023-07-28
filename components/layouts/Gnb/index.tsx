@@ -36,7 +36,7 @@ export default memo(Gnb);
 
 const StyledGnb = styled.nav`
   background-color: #ddd;
-  position: fixed;
+  position: absolute;
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);

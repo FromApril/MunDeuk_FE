@@ -12,9 +12,8 @@ export default function BottomLayout({
   return <StyledBottomLayout {...restProps}>{children}</StyledBottomLayout>;
 }
 
-// styled
 const StyledBottomLayout = styled.div`
-  position: fixed;
+  position: absolute;
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);

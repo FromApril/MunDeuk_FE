@@ -13,6 +13,13 @@ export default function useLocation() {
     return latitude === 0 && longitude === 0;
   };
 
+  const getLocationByPosition = (position: { La: number; Ma: number }) => {
+    return {
+      latitude: position.Ma,
+      longitude: position.La,
+    };
+  };
+
   const isLoading = isEmptyLocation(location);
   const isError = latitude === -1 && longitude === -1;
 
@@ -21,5 +28,6 @@ export default function useLocation() {
     isLoading,
     isError,
     isEmptyLocation,
+    getLocationByPosition,
   };
 }

@@ -1,6 +1,6 @@
 {
   "name": "mundeuk_fe",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -49,6 +49,7 @@
     "@storybook/react": "^7.0.25",
     "@storybook/testing-library": "^0.0.14-next.2",
     "@svgr/webpack": "^8.0.1",
+    "@tanstack/react-query-devtools": "^4.32.0",
     "@testing-library/cypress": "^9.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
