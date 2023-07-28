@@ -22,6 +22,7 @@ export default function PageLayout({ children }: PropsWithChildren) {
 const StyledPageLayout = styled.div`
   margin: 0 auto;
   min-height: 100vh;
+  position: relative;
 
   @media screen and (min-width: ${layouts.deviceWidth}) {
     width: ${layouts.deviceWidth};
