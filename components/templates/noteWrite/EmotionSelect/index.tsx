@@ -9,7 +9,10 @@ import Emotion from './Emotion';
 export default function EmotionSelect() {
   return (
     <PageContainer css={containerCss}>
-      <Navigation isBack title="오늘의 감정" />
+      <Navigation>
+        <Navigation.Back />
+        <Navigation.Title>오늘의 감정</Navigation.Title>
+      </Navigation>
       <Emotion />
     </PageContainer>
   );
