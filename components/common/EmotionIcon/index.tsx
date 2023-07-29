@@ -4,8 +4,8 @@ type EmotionIconProps = {
   name: keyof typeof Icons;
   width: number | string;
   height: number | string;
+  fill: string | 'none';
   stroke?: string;
-  fill?: string | 'none';
   onClick?: () => void;
 };
 
