@@ -15,7 +15,10 @@ export default function ContentsWrite() {
 
   return (
     <PageContainer css={containerCss}>
-      <Navigation isBack title="쪽지 작성" />
+      <Navigation>
+        <Navigation.Back />
+        <Navigation.Title>쪽지 작성</Navigation.Title>
+      </Navigation>
       <ContentBody>
         <TextSection>
           <Description>글 작성하기</Description>

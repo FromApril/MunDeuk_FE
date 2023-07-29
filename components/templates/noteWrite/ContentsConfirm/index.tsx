@@ -17,7 +17,10 @@ export default function ContentsConfirm() {
 
   return (
     <PageContainer css={containerCss}>
-      <Navigation isBack title="작성한 쪽지 확인" />
+      <Navigation>
+        <Navigation.Back />
+        <Navigation.Title>작성한 쪽지 확인</Navigation.Title>
+      </Navigation>
       <SelectedEmotion>
         <EmotionIcon
           name={emotion}

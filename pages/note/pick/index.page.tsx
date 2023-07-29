@@ -18,7 +18,9 @@ export default function NotePickPage() {
 
   return (
     <PageContainer>
-      <Navigation isBack />
+      <Navigation>
+        <Navigation.Back />
+      </Navigation>
       <NotePickMessage>
         <p>쪽지를 발견했어요!</p>
         <p>쪽지를 함께 열어볼까요?</p>
