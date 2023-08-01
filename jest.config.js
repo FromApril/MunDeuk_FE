@@ -10,12 +10,12 @@ const createJestConfig = nextJest({
 const config = {
   // Add more setup options before each test is run
   clearMocks: true,
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.tsx'],
   testEnvironment: 'jest-environment-jsdom',
   coverageReporters: ['json'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
-    '^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+    '^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/__mocks__/fileMock.js',
   },
 };
