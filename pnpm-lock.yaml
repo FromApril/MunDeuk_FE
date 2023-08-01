@@ -112,6 +112,9 @@ devDependencies:
   '@types/jest':
     specifier: ^29.5.1
     version: 29.5.1
+  '@types/jest-plugin-context':
+    specifier: ^2.9.5
+    version: 2.9.5
   '@types/testing-library__jest-dom':
     specifier: ^5.14.5
     version: 5.14.5
@@ -145,6 +148,9 @@ devDependencies:
   jest-environment-jsdom:
     specifier: ^29.5.0
     version: 29.5.0
+  jest-plugin-context:
+    specifier: ^2.9.0
+    version: 2.9.0(jest@29.5.0)
   msw:
     specifier: ^1.2.3
     version: 1.2.3(typescript@5.0.4)
@@ -5158,6 +5164,12 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
+  /@types/jest-plugin-context@2.9.5:
+    resolution: {integrity: sha512-AMkXriHUk84gBngUMS5mDQZ0/YATPY8wHXwiW/+hVG8SkbEG0PjiNZeoDz39F+tIlHNeFEBaLox4o32wUA5rmw==}
+    dependencies:
+      '@types/jest': 29.5.1
+    dev: true
+
   /@types/jest@29.5.1:
     resolution: {integrity: sha512-tEuVcHrpaixS36w7hpsfLBLpjtMRJUE09/MHXn923LOVojDwyC14cWcfc0rDs0VEfUyYmt/+iX1kxxp+gZMcaQ==}
     dependencies:
@@ -9822,6 +9834,14 @@ packages:
       '@jest/types': 29.5.0
       '@types/node': 18.16.3
       jest-util: 29.5.0
+    dev: true
+
+  /jest-plugin-context@2.9.0(jest@29.5.0):
+    resolution: {integrity: sha512-soBudNt3oTgeSFhRzLY2BwZdVuAlJ29zraNqt+PVRogkTPzNdvxIT3b0JXHQZUnT3jNsoNhTY9EDnGsyO2ExAg==}
+    peerDependencies:
+      jest: '*'
+    dependencies:
+      jest: 29.5.0(@types/node@18.16.3)
     dev: true
 
   /jest-pnp-resolver@1.2.3(jest-resolve@29.5.0):

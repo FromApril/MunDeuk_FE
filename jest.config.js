@@ -10,6 +10,7 @@ const createJestConfig = nextJest({
 const config = {
   // Add more setup options before each test is run
   clearMocks: true,
+  setupFiles: ['jest-plugin-context/setup'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.tsx'],
   testEnvironment: 'jest-environment-jsdom',
   coverageReporters: ['json'],
