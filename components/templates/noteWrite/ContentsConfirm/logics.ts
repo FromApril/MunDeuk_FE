@@ -47,7 +47,7 @@ export default function useContentsConfirm() {
       },
       onError: (error) => {
         alert('쪽지 작성하기를 실패했습니다.');
-        console.error(error);
+        // console.error(error);
       },
       onSettled: () => {
         hideLoading();
