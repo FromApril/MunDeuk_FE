@@ -43,6 +43,9 @@ jobs:
     permissions: write-all
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with: 
+          version: latest
       - name: Generate .env File
         run: |
           echo "NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}" >> .env
