@@ -12,8 +12,7 @@ describe('<Navigation/>', () => {
     expect(screen.getByText('제목입니다')).toBeInTheDocument();
   });
 
-  // TODO : SVG 컴포넌트 mocking
-  /* it('백 버튼이 있으면, onClick 핸들러를 실행할 수 있다.', () => {
+  it('백 버튼이 있으면, onClick 핸들러를 실행할 수 있다.', () => {
     const handleClick = jest.fn();
 
     render(
@@ -22,10 +21,10 @@ describe('<Navigation/>', () => {
       </Navigation>,
     );
 
-    fireEvent.click(screen.getByLabelText('아이콘'));
+    fireEvent.click(screen.getByText('ArrowRight'));
 
     expect(handleClick).toBeCalledTimes(1);
-  }); */
+  });
 
   it('완료 버튼이 있으면, onClick 핸들러를 실행할 수 있다.', () => {
     const handleClick = jest.fn();

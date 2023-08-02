@@ -22,37 +22,38 @@ jobs:
           name: Next.js artifacts
           path: .next
 
-  unit-test:
+  # unit-test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: pnpm/action-setup@v2
+  #       with: 
+  #         version: latest
+  #     - name: Unit test (Jest)
+  #       run: |
+  #         pnpm install
+  #         pnpm test:coverage
+  #     - uses: actions/upload-artifact@master
+  #       with:  
+  #         name: Unit-test coverage
+  #         path: coverage
+
+  unit-test-coverage:
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
         with: 
           version: latest
-      - name: Unit test (Jest)
+      - name: Generate .env File
         run: |
-          pnpm install
-          pnpm test:coverage
-      # - uses: actions/upload-artifact@master
-      #   with:  
-      #     name: Unit-test coverage
-      #     path: coverage
-
-  # coverage:
-  #   needs: unit-test
-  #   runs-on: ubuntu-latest
-  #   permissions: write-all
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: actions/download-artifact@master
-  #       with:
-  #         name: Unit-test coverage
-  #         path: coverage
-  #     - uses: ArtiomTr/jest-coverage-report-action@v2
-  #       with:
-  #         github-token: ${{ secrets.GITHUB_TOKEN }}
-  #         coverage-file: './coverage/coverage-final.json'
-  #         base-coverage-file: './coverage/coverage-final.json'
+          echo "NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}" >> .env
+          echo "NEXT_PUBLIC_KAKAO_API_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_API_KEY }}" >> .env
+      - uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          package-manager: pnpm
 
   e2e-test:
     needs: build

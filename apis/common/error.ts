@@ -20,7 +20,7 @@ export class ApiError<T = unknown> extends AxiosError<T> {
   constructor(error: AxiosError<T>, message?: string) {
     super(message ?? error.message);
 
-    console.log(error);
+    // console.log(error);
 
     this.stack = error.stack;
     this.config = error.config;
@@ -52,8 +52,5 @@ export class ApiError<T = unknown> extends AxiosError<T> {
     if (status > HTTP_STATUS.INTERNAL_SERVER) {
       this.name = 'OtherServerError';
     }
-
-    console.warn('에러 발생 !!');
-    console.warn(this.name);
   };
 }

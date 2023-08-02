@@ -24,6 +24,7 @@ describe('<EmotionIcon />', () => {
     name: 'Default',
     width: 30,
     height: 30,
+    fill: 'blue',
     onClick: handleClick,
   };
 
