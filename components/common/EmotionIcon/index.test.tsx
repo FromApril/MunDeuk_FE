@@ -5,15 +5,12 @@ import EmotionIcon from '.';
 
 type Props = ComponentProps<typeof EmotionIcon>;
 
-jest.mock('@/components/common/EmotionIcon', () => {
-  return function Icon({ name, onClick }: Props) {
-    return (
-      <svg data-test-id={name} onClick={onClick}>
-        {name}
-      </svg>
-    );
-  };
-});
+jest.unmock('@/components/common/EmotionIcon');
+
+jest.mock('@/public/emotionIcons', () => ({
+  Default: (props: Props) => <svg {...props}>Default</svg>,
+  Depressed: (props: Props) => <svg {...props}>Depressed</svg>,
+}));
 
 describe('<EmotionIcon />', () => {
   const iconName1 = 'Default';
