@@ -10,13 +10,9 @@ function Fallback({ error, resetErrorBoundary }: FallbackProps) {
   }
 
   return (
-    <div className="inline-flex items-center h-[20px] border border-black my-2 p-5">
-      <h1 className="">일시적인 오류가 발생했습니다</h1>
-      <button
-        className="bg-emerald-100 h100 mx-2 px-2 rounded"
-        type="button"
-        onClick={resetErrorBoundary}
-      >
+    <div>
+      <h1>일시적인 오류가 발생했습니다</h1>
+      <button type="button" onClick={resetErrorBoundary}>
         다시 시도하기
       </button>
     </div>
