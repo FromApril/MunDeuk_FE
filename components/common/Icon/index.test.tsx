@@ -5,11 +5,13 @@ import Icon from './index';
 
 type Props = ComponentProps<typeof Icon>;
 
-jest.mock('@/components/common/Icon', () => {
-  return function Icon(props: Props) {
-    return <svg onClick={props.onClick}>{props.name}</svg>;
-  };
-});
+jest.unmock('@/components/common/Icon');
+
+jest.mock('@/public/icons', () => ({
+  ArrowRight: (props: Props) => <svg {...props}>ArrowRight</svg>,
+  Camera: (props: Props) => <svg {...props}>Camera</svg>,
+  Close: (props: Props) => <svg {...props}>Close</svg>,
+}));
 
 describe('<Icon />', () => {
   const handleClick = jest.fn();

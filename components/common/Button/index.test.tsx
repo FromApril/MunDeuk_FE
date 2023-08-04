@@ -12,7 +12,7 @@ describe('<Button>', () => {
   };
 
   it('버튼 내부에 children을 렌더링 한다.', () => {
-    renderButton({ variant: 'dashed' });
+    renderButton({ variant: 'primary' });
 
     expect(screen.getByText(BUTTON_TEXT)).toBeInTheDocument();
   });
@@ -23,5 +23,13 @@ describe('<Button>', () => {
     fireEvent.click(screen.getByText(BUTTON_TEXT));
 
     expect(handleClick).toBeCalledTimes(1);
+  });
+
+  it('disabled 상태이면, 클릭 핸들러 함수가 작동하지 않는다.', () => {
+    renderButton({ variant: 'primary', disabled: true, onClick: handleClick });
+
+    fireEvent.click(screen.getByText(BUTTON_TEXT));
+
+    expect(handleClick).toBeCalledTimes(0);
   });
 });
