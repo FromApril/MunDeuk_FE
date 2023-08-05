@@ -54,26 +54,26 @@ export default Object.assign(Navigation, {
 
 const StyledNavigation = styled.div`
   background-color: #fff;
-  display: grid;
+  display: flex;
   align-items: center;
   padding: 0 20px;
   height: 50px;
 `;
 
 const StyledBack = styled.div`
-  flex: 0;
+  flex: 0 0 30px;
   cursor: pointer;
 `;
 
 const StyledTitle = styled.div`
   flex: auto;
+  max-width: calc(100% - 70px);
   text-align: center;
   font-weight: bold;
 `;
 
 const StyledComplete = styled.div`
   flex: 0 0 30px;
-  justify-self: flex-end;
   font-weight: bold;
   cursor: pointer;
 `;
