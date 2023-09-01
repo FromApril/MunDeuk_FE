@@ -1,4 +1,4 @@
-export const throttle = (callback: Function, delay: number = 0) => {
+export const throttle = (callback: () => void, delay: number) => {
   let waiting = false;
 
   return () => {
@@ -14,7 +14,7 @@ export const throttle = (callback: Function, delay: number = 0) => {
   };
 };
 
-export const debounce = (callback: Function, delay: number) => {
+export const debounce = (callback: () => void, delay: number) => {
   let timerId: NodeJS.Timer;
 
   return () => {
