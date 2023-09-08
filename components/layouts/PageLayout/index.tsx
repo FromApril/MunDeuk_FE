@@ -19,7 +19,7 @@ export default function PageLayout({ children }: PropsWithChildren) {
   );
 }
 
-const StyledPageLayout = styled.div`
+export const StyledPageLayout = styled.div`
   margin: 0 auto;
   min-height: 100vh;
   position: relative;
