@@ -1,4 +1,6 @@
-import { useRouter } from 'next/router';
+'use client';
+
+import { usePathname, useRouter } from 'next/navigation';
 
 import ContentsValidation from '@/components/pages/noteWrite/ContentsValidation';
 import ContentsConfirm from '@/components/templates/noteWrite/ContentsConfirm';

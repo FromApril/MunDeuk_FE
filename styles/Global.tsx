@@ -1,3 +1,5 @@
+'use client';
+
 import { css, Global } from '@emotion/react';
 
 const globalStyle = css`

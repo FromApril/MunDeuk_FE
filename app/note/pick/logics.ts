@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import useUser from '@/hooks/useUser';
 import useNote from '@/queries/useNote';

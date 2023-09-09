@@ -1,4 +1,7 @@
+'use client';
+
 import styled from '@emotion/styled';
+import { Suspense } from 'react';
 
 import MapLoading from '@/components/common/MapLoading';
 import PageContainer from '@/components/layouts/PageContainer';
@@ -23,9 +26,11 @@ export default function HomePage() {
   }
 
   return (
+    // <Suspense fallback={<MapLoading />}>
     <PageContainer>
       <Map id="map" />
     </PageContainer>
+    // </Suspense>
   );
 }
 

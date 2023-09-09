@@ -7,7 +7,7 @@ import { server } from './mocks/server';
 
 type Props = ComponentProps<typeof Icon>;
 
-jest.mock('next/router', () => require('next-router-mock'));
+jest.mock('next/navigation', () => require('next-router-mock'));
 
 jest.mock('@/components/common/Icon', () => {
   return function Icon(props: Props) {

@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import { postNoteWithImage } from '@/apis/note';
 import useLoading from '@/hooks/useLoading';

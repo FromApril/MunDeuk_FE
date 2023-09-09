@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { usePathname, useRouter } from 'next/navigation';
 
 import useGeoLocation from '@/hooks/useGeoLocation';
 import useLoading from '@/hooks/useLoading';
@@ -6,11 +6,12 @@ import useLoading from '@/hooks/useLoading';
 export default function usePageLayout() {
   useGeoLocation();
 
-  const router = useRouter();
+  // const router = useRouter();
+  const pathname = usePathname();
   const { isLoading } = useLoading();
 
-  const isShowGnb =
-    router.pathname === '/home' || router.pathname === '/myPage';
+  const isShowGnb = pathname === '/home' || pathname === '/myPage';
+  null;
 
   return {
     isShowGnb,

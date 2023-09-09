@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { memo } from 'react';
 
 import { layouts } from '@/styles/layouts';
